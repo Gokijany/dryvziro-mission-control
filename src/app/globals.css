@@ -208,3 +208,28 @@
   min-height: 100vh;
   min-height: 100dvh;
 }
+
+/* Radar/signal pulse — a device establishing connection. Used by the
+   "coming soon" module status indicator; reusable for other device-status
+   visuals (pairing, calibration, live telemetry) later. */
+@keyframes radar-pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+.radar-ring {
+  animation: radar-pulse 2.6s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radar-ring {
+    animation: none;
+    opacity: 0.2;
+  }
+}
