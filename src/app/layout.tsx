@@ -1,8 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-
 import QueryProvider from "@/providers/QueryProvider";
-import AuthProvider from "@/providers/AuthProvider";
 
 export const metadata: Metadata = {
   title: "Dryvziro Mission Control",
@@ -18,9 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <QueryProvider>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
+          {children}
         </QueryProvider>
       </body>
     </html>
