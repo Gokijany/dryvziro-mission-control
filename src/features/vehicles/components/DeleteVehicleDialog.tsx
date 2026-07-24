@@ -4,6 +4,7 @@ import { AlertTriangle, Loader2 } from "lucide-react";
 import { isAxiosError } from "axios";
 
 import { Modal } from "@/components/shared/Modal";
+import { FormErrorBanner } from "@/components/shared/FormErrorBanner";
 import { useDeleteVehicle } from "@/features/vehicles/hooks/useVehicles";
 import type { Vehicle } from "@/features/vehicles/types/vehicle";
 
@@ -54,9 +55,7 @@ export function DeleteVehicleDialog({ vehicle, onClose, onDeleted }: DeleteVehic
         </div>
 
         {deleteVehicle.isError && (
-          <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-[13px] text-destructive">
-            {getErrorMessage(deleteVehicle.error)}
-          </div>
+          <FormErrorBanner>{getErrorMessage(deleteVehicle.error)}</FormErrorBanner>
         )}
 
         <div className="flex items-center justify-end gap-2 pt-1">

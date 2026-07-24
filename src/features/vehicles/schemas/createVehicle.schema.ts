@@ -3,7 +3,16 @@ import { z } from "zod";
 const currentYear = new Date().getFullYear();
 
 export const createVehicleSchema = z.object({
-  organization_id: z.string().uuid("Missing organization — cannot create a vehicle."),
+  // Empty string = unaffiliated/personal vehicle (no organization).
+  // Converted to null before hitting the API — see AddVehicleModal's
+  // onSubmit. Kept as a plain string here (not z.string().uuid().nullable())
+  // to avoid an input/output type mismatch between react-hook-form and
+  // the zod resolver.
+  organization_id: z
+    .string()
+    .refine((value) => value === "" || z.string().uuid().safeParse(value).success, {
+      message: "Invalid organization selected.",
+    }),
   vin: z
     .string()
     .trim()

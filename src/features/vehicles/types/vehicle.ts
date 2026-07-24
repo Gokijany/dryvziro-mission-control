@@ -8,7 +8,7 @@ export interface OrganizationSummary {
 /** Mirrors the backend's VehicleResponse schema exactly. */
 export interface Vehicle {
   id: string;
-  organization_id: string;
+  organization_id: string | null;
   vin: string;
   license_plate: string;
   make: string;
@@ -27,7 +27,7 @@ export interface PaginatedVehicles {
 }
 
 export interface VehicleCreateInput {
-  organization_id: string;
+  organization_id: string | null;
   vin: string;
   license_plate: string;
   make: string;

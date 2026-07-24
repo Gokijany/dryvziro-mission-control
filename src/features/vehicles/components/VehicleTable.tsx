@@ -1,11 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Star } from "lucide-react";
+import { Star, Pencil, Trash2 } from "lucide-react";
 import type { Vehicle } from "@/features/vehicles/types/vehicle";
 import { VehicleStatusBadge } from "./VehicleStatusBadge";
 import { TelemetryPendingBadge } from "./TelemetryPendingPanel";
-import { VehicleRowActionsMenu } from "./VehicleRowActionsMenu";
 
 interface VehicleTableProps {
   vehicles: Vehicle[];
@@ -56,7 +55,7 @@ export function VehicleTable({
           <th className="px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-muted-foreground">
             TELEMETRY
           </th>
-          <th className="w-10 px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-muted-foreground">
+          <th className="w-24 px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-muted-foreground">
             ACTIONS
           </th>
         </tr>
@@ -115,7 +114,24 @@ export function VehicleTable({
                 <TelemetryPendingBadge />
               </td>
               <td className="px-3 py-3 text-right" onClick={(e) => e.stopPropagation()}>
-                <VehicleRowActionsMenu vehicle={vehicle} onEdit={onEdit} onDelete={onDelete} />
+                <div className="flex items-center justify-end gap-1">
+                  <button
+                    type="button"
+                    onClick={() => onEdit(vehicle)}
+                    aria-label={`Edit ${vehicle.license_plate}`}
+                    className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  >
+                    <Pencil className="h-3.5 w-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => onDelete(vehicle)}
+                    aria-label={`Delete ${vehicle.license_plate}`}
+                    className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </button>
+                </div>
               </td>
             </tr>
           );

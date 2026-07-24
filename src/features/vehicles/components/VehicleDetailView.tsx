@@ -102,7 +102,7 @@ export function VehicleDetailView({ vehicleId }: VehicleDetailViewProps) {
             <button
               type="button"
               onClick={() => setIsDeleting(true)}
-              className="flex items-center gap-1.5 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-1.5 text-[12px] font-medium text-destructive transition-colors hover:bg-destructive/15"
+              className="flex items-center gap-1.5 rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-1.5 text-[12px] font-medium text-foreground transition-colors hover:bg-destructive/15"
             >
               <Trash2 className="h-3.5 w-3.5" />
               Delete

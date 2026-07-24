@@ -3,10 +3,11 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AlertCircle, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { isAxiosError } from "axios";
 
 import { Modal } from "@/components/shared/Modal";
+import { FormErrorBanner } from "@/components/shared/FormErrorBanner";
 import { useUpdateVehicle } from "@/features/vehicles/hooks/useVehicles";
 import {
   updateVehicleSchema,
@@ -177,10 +178,7 @@ export function EditVehicleModal({ vehicle, onClose }: EditVehicleModalProps) {
         </div>
 
         {updateVehicle.isError && (
-          <div className="flex items-start gap-2.5 rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-[13px] text-destructive">
-            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
-            {getErrorMessage(updateVehicle.error)}
-          </div>
+          <FormErrorBanner>{getErrorMessage(updateVehicle.error)}</FormErrorBanner>
         )}
 
         <div className="flex items-center justify-end gap-2 pt-2">
