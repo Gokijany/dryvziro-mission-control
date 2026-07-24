@@ -66,7 +66,7 @@ export function ComingSoonPage({
           </p>
 
           {/* Stage tracker — a real build sequence, not decoration */}
-          <div className="mx-auto mt-7 flex max-w-[280px] items-center">
+          <div className="mx-auto mt-7 flex max-w-70 items-center">
             {STAGES.map((s, i) => (
               <div key={s.id} className="flex flex-1 items-center last:flex-initial">
                 <div className="flex flex-col items-center gap-1.5">
