@@ -19,6 +19,15 @@ const DEFAULT_ZOOM = 12;
 // open alternative, not a trial/demo tier. https://openfreemap.org
 const MAP_STYLE_URL = "https://tiles.openfreemap.org/styles/dark";
 
+// Next.js's Turbopack dev server fails to correctly serve MapLibre's
+// dynamically-loaded web worker script (confirmed bug:
+// https://github.com/vercel/next.js/issues/86495 — no console errors,
+// map just never fires "load"). Pointing the worker at a CDN copy
+// matching the exact installed version sidesteps the bundler entirely.
+maplibregl.setWorkerUrl(
+  "https://cdn.jsdelivr.net/npm/maplibre-gl@6.0.0/dist/maplibre-gl-worker.mjs",
+);
+
 export function FleetMap() {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
@@ -37,10 +46,13 @@ export function FleetMap() {
       attributionControl: false,
     });
 
-    map.on("load", () => setMapLoaded(true));
+    map.on("load", () => {
+      console.info("[FleetMap] map load event fired — style + initial tiles ready");
+      setMapLoaded(true);
+    });
 
     map.on("error", (e: maplibregl.ErrorEvent) => {
-      console.error("MapLibre error:", e.error);
+      console.error("[FleetMap] MapLibre error event:", e.error);
       setMapError(e.error?.message ?? "Failed to load the map.");
     });
 
@@ -76,6 +88,15 @@ export function FleetMap() {
     <div className="relative h-full w-full overflow-hidden rounded-xl">
       <div ref={containerRef} className="h-full w-full" />
 
+      {!mapLoaded && (
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#0c0c0c]">
+          <div className="flex items-center gap-2 text-[13px] text-white/50">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
+            Loading map...
+          </div>
+        </div>
+      )}
+
       <div className="pointer-events-none absolute inset-0 flex flex-col p-4">
         <div className="pointer-events-auto flex items-start justify-between gap-4">
           <MapFilters />
@@ -102,4 +123,4 @@ export function FleetMap() {
   );
 }
 
-export default FleetMap;
+export default FleetMap; 
