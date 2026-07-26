@@ -4,15 +4,14 @@ import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-import { RegisterRequest } from "@/types/auth";
-import { AuthService } from "@/services/auth.service";
+import { RegisterRequest } from "@/features/auth/types/auth";
+import { AuthService } from "@/features/auth/services/auth.service";
 
 export function useRegister() {
   const router = useRouter();
 
   return useMutation({
-    mutationFn: (data: RegisterRequest) =>
-      AuthService.register(data),
+    mutationFn: (data: RegisterRequest) => AuthService.register(data),
 
     onSuccess: (response) => {
       console.log("Registration successful");

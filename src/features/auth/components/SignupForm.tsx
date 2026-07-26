@@ -7,16 +7,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import AuthHeader from "./AuthHeader";
-import {
-  signupSchema,
-  SignupFormData,
-} from "@/schemas/signup.schema";
-import { useRegister } from "@/hooks/useRegister";
+import { signupSchema, SignupFormData } from "@/features/auth/schemas/signup.schema";
+import { useRegister } from "@/features/auth/hooks/useRegister";
 
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] =
-    useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const registerMutation = useRegister();
 
@@ -49,16 +45,10 @@ export default function SignupForm() {
         subtitle="Join Dryvziro Mission Control and start managing your fleet."
       />
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-5"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* Full Name */}
         <div>
-          <label
-            htmlFor="full_name"
-            className="mb-2 block text-sm font-medium text-gray-300"
-          >
+          <label htmlFor="full_name" className="mb-2 block text-sm font-medium text-gray-300">
             Full Name
           </label>
 
@@ -75,18 +65,13 @@ export default function SignupForm() {
           />
 
           {errors.full_name && (
-            <p className="mt-2 text-sm text-red-400">
-              {errors.full_name.message}
-            </p>
+            <p className="mt-2 text-sm text-red-400">{errors.full_name.message}</p>
           )}
         </div>
 
         {/* Email */}
         <div>
-          <label
-            htmlFor="email"
-            className="mb-2 block text-sm font-medium text-gray-300"
-          >
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-300">
             Email Address
           </label>
 
@@ -102,19 +87,12 @@ export default function SignupForm() {
             }`}
           />
 
-          {errors.email && (
-            <p className="mt-2 text-sm text-red-400">
-              {errors.email.message}
-            </p>
-          )}
+          {errors.email && <p className="mt-2 text-sm text-red-400">{errors.email.message}</p>}
         </div>
 
         {/* Password */}
         <div>
-          <label
-            htmlFor="password"
-            className="mb-2 block text-sm font-medium text-gray-300"
-          >
+          <label htmlFor="password" className="mb-2 block text-sm font-medium text-gray-300">
             Password
           </label>
 
@@ -136,27 +114,18 @@ export default function SignupForm() {
               onClick={() => setShowPassword((prev) => !prev)}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-[#B4E920]"
             >
-              {showPassword ? (
-                <EyeOff size={20} />
-              ) : (
-                <Eye size={20} />
-              )}
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
           {errors.password && (
-            <p className="mt-2 text-sm text-red-400">
-              {errors.password.message}
-            </p>
+            <p className="mt-2 text-sm text-red-400">{errors.password.message}</p>
           )}
         </div>
 
         {/* Confirm Password */}
         <div>
-          <label
-            htmlFor="confirmPassword"
-            className="mb-2 block text-sm font-medium text-gray-300"
-          >
+          <label htmlFor="confirmPassword" className="mb-2 block text-sm font-medium text-gray-300">
             Confirm Password
           </label>
 
@@ -175,23 +144,15 @@ export default function SignupForm() {
 
             <button
               type="button"
-              onClick={() =>
-                setShowConfirmPassword((prev) => !prev)
-              }
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-[#B4E920]"
             >
-              {showConfirmPassword ? (
-                <EyeOff size={20} />
-              ) : (
-                <Eye size={20} />
-              )}
+              {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
           {errors.confirmPassword && (
-            <p className="mt-2 text-sm text-red-400">
-              {errors.confirmPassword.message}
-            </p>
+            <p className="mt-2 text-sm text-red-400">{errors.confirmPassword.message}</p>
           )}
         </div>
 
@@ -221,10 +182,7 @@ export default function SignupForm() {
         {/* Login Link */}
         <p className="text-center text-sm text-gray-400">
           Already have an account?{" "}
-          <Link
-            href="/login"
-            className="font-medium text-[#B4E920] hover:underline"
-          >
+          <Link href="/login" className="font-medium text-[#B4E920] hover:underline">
             Sign In
           </Link>
         </p>

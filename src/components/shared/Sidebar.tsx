@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import type { ComponentType, SVGProps } from "react";
 import {
   LayoutGrid,
@@ -60,6 +61,17 @@ export interface SidebarProps {
 export function Sidebar({ systemHealth = 100 }: SidebarProps) {
   const pathname = usePathname();
   const { isMobileOpen, closeSidebar } = useSidebar();
+  const { user } = useAuth();
+
+  const bottomNav: NavItem[] = [
+    { label: "Notifications", href: "/notifications", icon: Bell },
+    { label: "Settings", href: "/settings", icon: Settings },
+    {
+      label: user?.full_name ?? "Account",
+      href: "/administrator",
+      icon: UserCircle2,
+    },
+  ];
 
   const renderLink = (item: NavItem) => {
     const active = pathname === item.href;
@@ -95,7 +107,7 @@ export function Sidebar({ systemHealth = 100 }: SidebarProps) {
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 shrink-0 -translate-x-full flex-col border-r border-sidebar-border bg-sidebar px-3 py-5 transition-transform duration-200 ease-out lg:sticky lg:top-0 lg:z-auto lg:w-60 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 flex h-screen w-64 shrink-0 -translate-x-full flex-col border-r border-sidebar-border bg-sidebar px-3 py-5 transition-transform duration-200 ease-out lg:static lg:w-60 lg:translate-x-0 ${
           isMobileOpen ? "translate-x-0" : ""
         }`}
       >
@@ -124,9 +136,7 @@ export function Sidebar({ systemHealth = 100 }: SidebarProps) {
         </div>
 
         {/* Main nav */}
-        <nav className="flex-1 space-y-0.5 overflow-y-auto">
-          {MAIN_NAV.map(renderLink)}
-        </nav>
+        <nav className="flex-1 space-y-0.5 overflow-y-auto">{MAIN_NAV.map(renderLink)}</nav>
 
         {/* System health */}
         <div className="my-4 border-t border-sidebar-border px-2 pt-4">
@@ -137,14 +147,16 @@ export function Sidebar({ systemHealth = 100 }: SidebarProps) {
           <div className="h-1 w-full overflow-hidden rounded-full bg-sidebar-foreground/10">
             <div
               className="h-full rounded-full bg-primary transition-[width]"
-              style={{ width: `${Math.min(100, Math.max(0, systemHealth))}%` }}
+              style={{
+                width: `${Math.min(100, Math.max(0, systemHealth))}%`,
+              }}
             />
           </div>
         </div>
 
         {/* Bottom nav */}
         <div className="space-y-0.5 border-t border-sidebar-border pt-3">
-          {BOTTOM_NAV.map(renderLink)}
+          {bottomNav.map(renderLink)}
         </div>
       </aside>
     </>
