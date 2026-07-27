@@ -6,9 +6,10 @@ import { Footer } from "@/components/shared/Footer";
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen bg-background">
+      <div className="flex h-screen overflow-hidden bg-background text-foreground">
         <Sidebar systemHealth={98} />
-        <main className="flex min-w-0 flex-1 flex-col overflow-x-hidden">
+
+        <main className="flex min-w-0 flex-1 flex-col overflow-y-auto overflow-x-hidden">
           {children}
           <Footer />
         </main>

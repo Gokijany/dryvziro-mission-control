@@ -8,7 +8,7 @@ import { isAxiosError } from "axios";
 
 import { Modal } from "@/components/shared/Modal";
 import { FormErrorBanner } from "@/components/shared/FormErrorBanner";
-import { useAuthStore } from "@/store/auth.store";
+import { useAuthStore } from "@/features/auth/store/auth.store";
 import { isCrossOrganizationRole } from "@/lib/roles";
 import { useCreateVehicle } from "@/features/vehicles/hooks/useVehicles";
 import { useOrganizations } from "@/features/organizations/hooks/useOrganizations";

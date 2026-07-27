@@ -1,39 +1,38 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
+import { UserRole } from "@/lib/roles"
 
-import { User } from "@/types/auth";
+export interface AuthUser {
+  id: string;
+  email: string;
+  full_name: string;
+  role: UserRole;
+  organization_id?: string | null;
+}
 
 interface AuthState {
-  user: User | null;
-
+  user: AuthUser | null;
   accessToken: string | null;
-
   refreshToken: string | null;
-
   isAuthenticated: boolean;
 
   login: (
-    user: User,
+    user: AuthUser,
     accessToken: string,
-    refreshToken: string,
+    refreshToken: string
   ) => void;
 
   logout: () => void;
 
-  setUser: (user: User) => void;
-
-  setAccessToken: (token: string | null) => void;
+  setUser: (user: AuthUser) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
-
       accessToken: null,
-
       refreshToken: null,
-
       isAuthenticated: false,
 
       login: (user, accessToken, refreshToken) =>
@@ -56,18 +55,10 @@ export const useAuthStore = create<AuthState>()(
         set({
           user,
         }),
-
-      setAccessToken: (token) =>
-        set((state) => ({
-          accessToken: token,
-          isAuthenticated: !!token,
-          user: token ? state.user : null,
-        })),
     }),
     {
       name: "dryvziro-auth",
-
       storage: createJSONStorage(() => localStorage),
-    },
-  ),
+    }
+  )
 );

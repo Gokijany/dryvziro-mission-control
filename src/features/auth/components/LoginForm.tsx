@@ -9,9 +9,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import AuthHeader from "./AuthHeader";
-import { loginSchema, LoginFormData } from "@/schemas/login.schema";
-import { useLogin } from "@/hooks/useLogin";
-
+import { loginSchema, LoginFormData } from "@/features/auth/schemas/login.schema";
+import { useLogin } from "@/features/auth/hooks/useLogin";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -29,23 +28,17 @@ export default function LoginForm() {
   });
 
   const onSubmit = async (data: LoginFormData) => {
-  loginMutation.mutate(data);
-};
+    loginMutation.mutate(data);
+  };
 
   return (
     <>
-      <AuthHeader
-        title="Welcome Back"
-        subtitle="Sign in to continue to Dryvziro Mission Control"
-      />
+      <AuthHeader title="Welcome Back" subtitle="Sign in to continue to Dryvziro Mission Control" />
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Email */}
         <div>
-          <label
-            htmlFor="email"
-            className="mb-2 block text-sm font-medium text-gray-300"
-          >
+          <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-300">
             Email Address
           </label>
 
@@ -62,19 +55,12 @@ export default function LoginForm() {
               }`}
           />
 
-          {errors.email && (
-            <p className="mt-2 text-sm text-red-400">
-              {errors.email.message}
-            </p>
-          )}
+          {errors.email && <p className="mt-2 text-sm text-red-400">{errors.email.message}</p>}
         </div>
 
         {/* Password */}
         <div>
-          <label
-            htmlFor="password"
-            className="mb-2 block text-sm font-medium text-gray-300"
-          >
+          <label htmlFor="password" className="mb-2 block text-sm font-medium text-gray-300">
             Password
           </label>
 
@@ -102,56 +88,45 @@ export default function LoginForm() {
           </div>
 
           {errors.password && (
-            <p className="mt-2 text-sm text-red-400">
-              {errors.password.message}
-            </p>
+            <p className="mt-2 text-sm text-red-400">{errors.password.message}</p>
           )}
         </div>
 
         {/* Remember Me */}
         <div className="flex items-center justify-between">
           <label className="flex items-center gap-2 text-sm text-gray-400">
-            <input
-              type="checkbox"
-              className="rounded border-gray-600 bg-[#122617]"
-            />
+            <input type="checkbox" className="rounded border-gray-600 bg-[#122617]" />
             Remember me
           </label>
 
-          <Link
-            href="/forgot-password"
-            className="text-sm text-[#B4E920] hover:underline"
-          >
+          {/* <Link href="/forgot-password" className="text-sm text-[#B4E920] hover:underline">
             Forgot Password?
-          </Link>
+          </Link> */}
         </div>
 
         {/* Submit Button */}
-       <button
-  type="submit"
-  disabled={loginMutation.isPending}
-  className="flex w-full items-center justify-center rounded-xl bg-[#B4E920] py-3 font-semibold text-[#08120B] transition hover:bg-[#C7F542] disabled:cursor-not-allowed disabled:opacity-70"
->
-  {loginMutation.isPending ? (
-    <>
-      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-      Signing In...
-    </>
-  ) : (
-    "Sign In"
-  )}
-</button>
+        <button
+          type="submit"
+          disabled={loginMutation.isPending}
+          className="flex w-full items-center justify-center rounded-xl bg-[#B4E920] py-3 font-semibold text-[#08120B] transition hover:bg-[#C7F542] disabled:cursor-not-allowed disabled:opacity-70"
+        >
+          {loginMutation.isPending ? (
+            <>
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              Signing In...
+            </>
+          ) : (
+            "Sign In"
+          )}
+        </button>
 
         {/* Signup Link */}
-        <p className="text-center text-sm text-gray-400">
+        {/* <p className="text-center text-sm text-gray-400">
           Don't have an account?{" "}
-          <Link
-            href="/signup"
-            className="font-medium text-[#B4E920] hover:underline"
-          >
+          <Link href="/signup" className="font-medium text-[#B4E920] hover:underline">
             Create one
           </Link>
-        </p>
+        </p> */}
       </form>
     </>
   );
