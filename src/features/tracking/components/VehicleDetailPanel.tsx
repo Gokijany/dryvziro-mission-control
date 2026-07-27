@@ -10,7 +10,11 @@ interface VehicleDetailPanelProps {
 }
 
 export function VehicleDetailPanel({ vehicle, onClose, onViewProfile }: VehicleDetailPanelProps) {
-  const improving = vehicle.efficiencyPercent >= 0;
+  const hasClimateMetrics =
+    vehicle.co2SavedKg !== undefined && vehicle.efficiencyPercent !== undefined;
+  const hasStatTiles = vehicle.chargePercent !== undefined || vehicle.engineLoadKwh !== undefined;
+  const improving = (vehicle.efficiencyPercent ?? 0) >= 0;
+  const displayName = vehicle.registration ?? `Vehicle ${vehicle.vehicleId.slice(0, 8)}`;
 
   return (
     <div className="pointer-events-auto flex h-full w-full max-w-80 flex-col overflow-hidden rounded-xl border border-white/10 bg-[#0b100c]/95 backdrop-blur-sm">
@@ -35,7 +39,7 @@ export function VehicleDetailPanel({ vehicle, onClose, onViewProfile }: VehicleD
       </div>
 
       <div className="flex-1 overflow-y-auto p-4">
-        <h2 className="text-lg font-semibold text-white">{vehicle.registration}</h2>
+        <h2 className="text-lg font-semibold text-white">{displayName}</h2>
 
         <div className="mt-3 grid grid-cols-2 gap-3">
           <div>
@@ -43,79 +47,99 @@ export function VehicleDetailPanel({ vehicle, onClose, onViewProfile }: VehicleD
               <User className="h-2.5 w-2.5" />
               DRIVER
             </div>
-            <div className="mt-0.5 text-[13px] font-medium text-white">{vehicle.driverName}</div>
+            <div className="mt-0.5 text-[13px] font-medium text-white">
+              {vehicle.driverName ?? "—"}
+            </div>
           </div>
           <div>
             <div className="text-[9px] font-semibold tracking-widest text-white/40">
               REGISTRATION
             </div>
-            <div className="mt-0.5 text-[13px] font-medium text-white">{vehicle.registration}</div>
+            <div className="mt-0.5 text-[13px] font-medium text-white">{displayName}</div>
           </div>
         </div>
 
-        {/* Climate metrics */}
-        <div className="mt-4 rounded-lg border border-white/10 bg-white/3 p-3">
-          <div className="text-[10px] font-semibold tracking-widest text-primary">
-            CLIMATE METRICS
-          </div>
-          <div className="mt-2 flex items-end justify-between">
-            <div>
-              <div className="text-[11px] text-white/50">Estimated CO2 Saved</div>
-              <div className="text-xl font-semibold text-primary">
-                {vehicle.co2SavedKg.toLocaleString()} <span className="text-[12px]">kg</span>
+        {/* Climate metrics — only for vehicles with rich (mock, for now) data */}
+        {hasClimateMetrics ? (
+          <div className="mt-4 rounded-lg border border-white/10 bg-white/3 p-3">
+            <div className="text-[10px] font-semibold tracking-widest text-primary">
+              CLIMATE METRICS
+            </div>
+            <div className="mt-2 flex items-end justify-between">
+              <div>
+                <div className="text-[11px] text-white/50">Estimated CO2 Saved</div>
+                <div className="text-xl font-semibold text-primary">
+                  {vehicle.co2SavedKg?.toLocaleString()} <span className="text-[12px]">kg</span>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-[10px] text-white/40">Efficiency</div>
+                <div
+                  className={`text-[13px] font-medium ${improving ? "text-primary" : "text-destructive"}`}
+                >
+                  {improving ? "+" : ""}
+                  {vehicle.efficiencyPercent}%
+                </div>
               </div>
             </div>
-            <div className="text-right">
-              <div className="text-[10px] text-white/40">Efficiency</div>
-              <div className={`text-[13px] font-medium ${improving ? "text-primary" : "text-destructive"}`}>
-                {improving ? "+" : ""}
-                {vehicle.efficiencyPercent}%
-              </div>
+            <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/10">
+              <div
+                className="h-full rounded-full bg-primary"
+                style={{ width: `${Math.min(100, Math.max(4, vehicle.chargePercent ?? 4))}%` }}
+              />
             </div>
           </div>
-          <div className="mt-2 h-1 w-full overflow-hidden rounded-full bg-white/10">
-            <div
-              className="h-full rounded-full bg-primary"
-              style={{ width: `${Math.min(100, Math.max(4, vehicle.chargePercent))}%` }}
-            />
+        ) : (
+          <div className="mt-4 rounded-lg border border-dashed border-white/10 bg-white/[0.02] p-3 text-[12px] text-white/40">
+            Climate metrics not available yet — this comes from Analytics, which isn&apos;t built.
           </div>
-        </div>
+        )}
 
         {/* Stat tiles */}
-        <div className="mt-3 grid grid-cols-2 gap-3">
-          <div className="rounded-lg border border-white/10 bg-white/3 p-3">
-            <BatteryCharging className="h-4 w-4 text-primary" />
-            <div className="mt-1.5 text-base font-semibold text-white">
-              {vehicle.chargePercent}%
+        {hasStatTiles && (
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            <div className="rounded-lg border border-white/10 bg-white/3 p-3">
+              <BatteryCharging className="h-4 w-4 text-primary" />
+              <div className="mt-1.5 text-base font-semibold text-white">
+                {vehicle.chargePercent !== undefined ? `${vehicle.chargePercent}%` : "—"}
+              </div>
+              <div className="text-[10px] text-white/40">Charge Status</div>
             </div>
-            <div className="text-[10px] text-white/40">Charge Status</div>
-          </div>
-          <div className="rounded-lg border border-white/10 bg-white/3 p-3">
-            <Gauge className="h-4 w-4 text-primary" />
-            <div className="mt-1.5 text-base font-semibold text-white">
-              {vehicle.engineLoadKwh} <span className="text-[11px] font-normal">kWh</span>
+            <div className="rounded-lg border border-white/10 bg-white/3 p-3">
+              <Gauge className="h-4 w-4 text-primary" />
+              <div className="mt-1.5 text-base font-semibold text-white">
+                {vehicle.engineLoadKwh !== undefined ? (
+                  <>
+                    {vehicle.engineLoadKwh} <span className="text-[11px] font-normal">kWh</span>
+                  </>
+                ) : (
+                  "—"
+                )}
+              </div>
+              <div className="text-[10px] text-white/40">Engine Load</div>
             </div>
-            <div className="text-[10px] text-white/40">Engine Load</div>
           </div>
-        </div>
+        )}
 
-        {/* Sensor status */}
-        <div className="mt-3 flex items-center justify-between rounded-lg border border-white/10 bg-white/3 p-3">
-          <div className="flex items-center gap-2">
-            <Radio className="h-4 w-4 text-white/50" />
-            <div>
-              <div className="text-[12px] font-medium text-white">{vehicle.sensorLabel}</div>
-              <div className="text-[10px] text-white/40">
-                {vehicle.sensorCalibrated ? "Calibrated & Streaming" : "Calibration Needed"}
+        {/* Sensor status — only when we know about a sensor at all */}
+        {vehicle.sensorLabel && (
+          <div className="mt-3 flex items-center justify-between rounded-lg border border-white/10 bg-white/3 p-3">
+            <div className="flex items-center gap-2">
+              <Radio className="h-4 w-4 text-white/50" />
+              <div>
+                <div className="text-[12px] font-medium text-white">{vehicle.sensorLabel}</div>
+                <div className="text-[10px] text-white/40">
+                  {vehicle.sensorCalibrated ? "Calibrated & Streaming" : "Calibration Needed"}
+                </div>
               </div>
             </div>
+            {vehicle.sensorCalibrated ? (
+              <CheckCircle2 className="h-4 w-4 text-primary" />
+            ) : (
+              <span className="h-2 w-2 rounded-full bg-destructive" />
+            )}
           </div>
-          {vehicle.sensorCalibrated ? (
-            <CheckCircle2 className="h-4 w-4 text-primary" />
-          ) : (
-            <span className="h-2 w-2 rounded-full bg-destructive" />
-          )}
-        </div>
+        )}
       </div>
 
       <div className="shrink-0 border-t border-white/10 p-4">

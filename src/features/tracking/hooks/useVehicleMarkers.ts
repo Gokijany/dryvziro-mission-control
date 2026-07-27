@@ -3,10 +3,10 @@
 import { useEffect, useRef } from "react";
 import * as maplibregl from "maplibre-gl";
 import type { RefObject } from "react";
-import type { VehicleTrackingCard } from "@/features/tracking/types/vehicleTrackingCard";
+import type { MapMarkerData } from "@/features/tracking/types/telemetry";
 import { STATUS_COLORS } from "@/features/tracking/components/MapLegend";
 
-function createMarkerElement(status: VehicleTrackingCard["status"]): HTMLDivElement {
+function createMarkerElement(status: MapMarkerData["status"]): HTMLDivElement {
   const el = document.createElement("div");
   el.className = "vehicle-marker";
   el.style.width = "28px";
@@ -22,7 +22,7 @@ function createMarkerElement(status: VehicleTrackingCard["status"]): HTMLDivElem
 
 interface UseVehicleMarkersArgs {
   mapRef: RefObject<maplibregl.Map | null>;
-  vehicles: VehicleTrackingCard[];
+  vehicles: MapMarkerData[];
   selectedVehicleId: string | null;
   onSelect: (vehicleId: string) => void;
   mapLoaded: boolean;

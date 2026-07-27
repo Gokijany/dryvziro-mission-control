@@ -8,7 +8,11 @@ import { MapLegend } from "./MapLegend";
 import { MapFilters } from "./MapFilters";
 import { VehicleDetailPanel } from "./VehicleDetailPanel";
 import { useVehicleMarkers } from "@/features/tracking/hooks/useVehicleMarkers";
+import { useLiveTelemetry } from "@/features/tracking/hooks/useLiveTelemetry";
 import { mockVehicleTracking } from "@/features/tracking/data/mockVehiclePositions";
+import { toMapMarkerData } from "@/features/tracking/types/telemetry";
+import type { MapMarkerData } from "@/features/tracking/types/telemetry";
+import type { VehicleTrackingCard } from "@/features/tracking/types/vehicleTrackingCard";
 
 // Nairobi — Dryvziro operates in Kenya's urban transport ecosystem per the
 // handbook, not the London example shown in the reference mockup.
@@ -64,17 +68,39 @@ export function FleetMap() {
     };
   }, []);
 
-  // TODO: swap mockVehicleTracking for a polling hook against GET
-  // /telemetry once that endpoint exists (checklist item: realtime updates).
+  // Proposed GET /telemetry/live-positions — not merged yet, will 404
+  // until it is. Falls back to mock data below rather than showing an
+  // empty map while waiting.
+  const { data: liveLocations } = useLiveTelemetry();
+  const isLive = Boolean(liveLocations && liveLocations.length > 0);
+
+  const markerData: MapMarkerData[] = isLive
+    ? liveLocations!.map(toMapMarkerData)
+    : mockVehicleTracking;
+
   useVehicleMarkers({
     mapRef,
-    vehicles: mockVehicleTracking,
+    vehicles: markerData,
     selectedVehicleId,
     onSelect: setSelectedVehicleId,
     mapLoaded,
   });
 
-  const selectedVehicle = mockVehicleTracking.find((v) => v.vehicleId === selectedVehicleId) ?? null;
+  const selectedVehicle: VehicleTrackingCard | null = (() => {
+    if (!selectedVehicleId) return null;
+
+    if (isLive) {
+      const match = liveLocations!.find((v) => v.vehicle_id === selectedVehicleId);
+      if (!match) return null;
+      // Only the fields we actually have from live telemetry — everything
+      // else (driver, climate metrics) stays undefined and the panel
+      // renders its "not available yet" fallback for those sections.
+      const marker = toMapMarkerData(match);
+      return { vehicleId: marker.vehicleId, latitude: marker.latitude, longitude: marker.longitude, status: marker.status };
+    }
+
+    return mockVehicleTracking.find((v) => v.vehicleId === selectedVehicleId) ?? null;
+  })();
 
   if (mapError) {
     return (
@@ -101,14 +127,22 @@ export function FleetMap() {
         <div className="pointer-events-auto flex items-start justify-between gap-4">
           <MapFilters />
 
-          {selectedVehicle && (
-            <div className="h-140 w-full max-w-80">
-              <VehicleDetailPanel
-                vehicle={selectedVehicle}
-                onClose={() => setSelectedVehicleId(null)}
-              />
-            </div>
-          )}
+          <div className="flex items-start gap-3">
+            {!isLive && mapLoaded && (
+              <span className="rounded-full border border-warning/30 bg-warning/15 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-wide text-warning">
+                Demo Data
+              </span>
+            )}
+
+            {selectedVehicle && (
+              <div className="h-140 w-full max-w-80">
+                <VehicleDetailPanel
+                  vehicle={selectedVehicle}
+                  onClose={() => setSelectedVehicleId(null)}
+                />
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="pointer-events-auto absolute bottom-4 left-4">
@@ -123,4 +157,4 @@ export function FleetMap() {
   );
 }
 
-export default FleetMap; 
+export default FleetMap;
