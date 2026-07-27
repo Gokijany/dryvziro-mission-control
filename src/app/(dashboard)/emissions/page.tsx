@@ -1,11 +1,5 @@
-import { ComingSoonPage } from "@/components/shared/ComingSoonPage";
+import { EmissionsView } from "@/features/emissions/components/EmissionsView";
 
 export default function EmissionsPage() {
-  return (
-    <ComingSoonPage
-      pageName="Emissions"
-      moduleCode="MOD-01"
-      description="Live fleet overview, key metrics, and the command center for daily operations."
-    />
-  );
+  return <EmissionsView />;
 }
