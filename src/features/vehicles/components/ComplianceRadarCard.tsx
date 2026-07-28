@@ -11,7 +11,7 @@ export function ComplianceRadarCard({ zones }: { zones: ComplianceZone[] }) {
   return (
     <div className="flex h-full flex-col rounded-xl border border-border bg-card p-5">
       <div className="flex items-center justify-between">
-        <div className="text-[10px] font-semibold tracking-widest text-muted-foreground">
+        <div className="text-[10px] font-semibold tracking-widest text-foreground">
           COMPLIANCE RADAR
         </div>
         <ShieldCheck className="h-4 w-4 text-primary" />
@@ -22,7 +22,7 @@ export function ComplianceRadarCard({ zones }: { zones: ComplianceZone[] }) {
           <div key={zone.id}>
             <div className="flex items-center justify-between text-[12px]">
               <span className="text-foreground">{zone.label}</span>
-              <span className="font-medium text-muted-foreground">{zone.percent}%</span>
+              <span className="font-medium text-foreground">{zone.percent}%</span>
             </div>
             <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-muted">
               <div

@@ -51,7 +51,7 @@ export default function LoginForm() {
               ${
                 errors.email
                   ? "border-red-500 focus:ring-red-500/20"
-                  : "border-white/10 focus:border-[#B4E920] focus:ring-2 focus:ring-[#B4E920]/20"
+                  : "border-white/10 focus:border-[#05A653] focus:ring-2 focus:ring-[#05A653]/20"
               }`}
           />
 
@@ -74,14 +74,14 @@ export default function LoginForm() {
                 ${
                   errors.password
                     ? "border-red-500 focus:ring-red-500/20"
-                    : "border-white/10 focus:border-[#B4E920] focus:ring-2 focus:ring-[#B4E920]/20"
+                    : "border-white/10 focus:border-[#05A653] focus:ring-2 focus:ring-[#05A653]/20"
                 }`}
             />
 
             <button
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-[#B4E920]"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-[#05A653]"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
@@ -99,7 +99,7 @@ export default function LoginForm() {
             Remember me
           </label>
 
-          {/* <Link href="/forgot-password" className="text-sm text-[#B4E920] hover:underline">
+          {/* <Link href="/forgot-password" className="text-sm text-[#05A653] hover:underline">
             Forgot Password?
           </Link> */}
         </div>
@@ -108,7 +108,7 @@ export default function LoginForm() {
         <button
           type="submit"
           disabled={loginMutation.isPending}
-          className="flex w-full items-center justify-center rounded-xl bg-[#B4E920] py-3 font-semibold text-[#08120B] transition hover:bg-[#C7F542] disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex w-full items-center justify-center rounded-xl bg-[#05A653] py-3 font-semibold text-[#08120B] transition hover:bg-[#C7F542] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {loginMutation.isPending ? (
             <>
@@ -123,7 +123,7 @@ export default function LoginForm() {
         {/* Signup Link */}
         {/* <p className="text-center text-sm text-gray-400">
           Don't have an account?{" "}
-          <Link href="/signup" className="font-medium text-[#B4E920] hover:underline">
+          <Link href="/signup" className="font-medium text-[#05A653] hover:underline">
             Create one
           </Link>
         </p> */}

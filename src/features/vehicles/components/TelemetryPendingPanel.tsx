@@ -2,7 +2,7 @@ import { RadioTower } from "lucide-react";
 
 export function TelemetryPendingBadge() {
   return (
-    <span className="inline-flex items-center gap-1.5 text-[12px] text-muted-foreground">
+    <span className="inline-flex items-center gap-1.5 text-[12px] text-foreground">
       <RadioTower className="h-3.5 w-3.5" strokeWidth={1.75} />
       No device paired
     </span>
@@ -19,9 +19,9 @@ export function TelemetryPendingPanel() {
         </span>
       </div>
       <p className="mt-4 text-[13px] font-medium text-foreground">No telemetry yet</p>
-      <p className="mt-1 max-w-xs text-[12px] text-muted-foreground">
-        Emissions, maintenance, sensor, and trip data will appear here once a DVIU is paired
-        with this vehicle.
+      <p className="mt-1 max-w-xs text-[12px] text-foreground">
+        Emissions, maintenance, sensor, and trip data will appear here once a DVIU is paired with
+        this vehicle.
       </p>
     </div>
   );

@@ -60,7 +60,7 @@ export default function SignupForm() {
             className={`w-full rounded-xl border bg-[#122617] px-4 py-3 text-white placeholder:text-gray-500 outline-none transition ${
               errors.full_name
                 ? "border-red-500 focus:ring-red-500/20"
-                : "border-white/10 focus:border-[#B4E920] focus:ring-2 focus:ring-[#B4E920]/20"
+                : "border-white/10 focus:border-[#05A653] focus:ring-2 focus:ring-[#05A653]/20"
             }`}
           />
 
@@ -83,7 +83,7 @@ export default function SignupForm() {
             className={`w-full rounded-xl border bg-[#122617] px-4 py-3 text-white placeholder:text-gray-500 outline-none transition ${
               errors.email
                 ? "border-red-500 focus:ring-red-500/20"
-                : "border-white/10 focus:border-[#B4E920] focus:ring-2 focus:ring-[#B4E920]/20"
+                : "border-white/10 focus:border-[#05A653] focus:ring-2 focus:ring-[#05A653]/20"
             }`}
           />
 
@@ -105,14 +105,14 @@ export default function SignupForm() {
               className={`w-full rounded-xl border bg-[#122617] px-4 py-3 pr-12 text-white placeholder:text-gray-500 outline-none transition ${
                 errors.password
                   ? "border-red-500 focus:ring-red-500/20"
-                  : "border-white/10 focus:border-[#B4E920] focus:ring-2 focus:ring-[#B4E920]/20"
+                  : "border-white/10 focus:border-[#05A653] focus:ring-2 focus:ring-[#05A653]/20"
               }`}
             />
 
             <button
               type="button"
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-[#B4E920]"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-[#05A653]"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
@@ -138,14 +138,14 @@ export default function SignupForm() {
               className={`w-full rounded-xl border bg-[#122617] px-4 py-3 pr-12 text-white placeholder:text-gray-500 outline-none transition ${
                 errors.confirmPassword
                   ? "border-red-500 focus:ring-red-500/20"
-                  : "border-white/10 focus:border-[#B4E920] focus:ring-2 focus:ring-[#B4E920]/20"
+                  : "border-white/10 focus:border-[#05A653] focus:ring-2 focus:ring-[#05A653]/20"
               }`}
             />
 
             <button
               type="button"
               onClick={() => setShowConfirmPassword((prev) => !prev)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-[#B4E920]"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 transition hover:text-[#05A653]"
             >
               {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
@@ -167,7 +167,7 @@ export default function SignupForm() {
         <button
           type="submit"
           disabled={registerMutation.isPending}
-          className="flex w-full items-center justify-center rounded-xl bg-[#B4E920] py-3 font-semibold text-[#08120B] transition hover:bg-[#C7F542] disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex w-full items-center justify-center rounded-xl bg-[#05A653] py-3 font-semibold text-[#08120B] transition hover:bg-[#C7F542] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {registerMutation.isPending ? (
             <>
@@ -182,7 +182,7 @@ export default function SignupForm() {
         {/* Login Link */}
         <p className="text-center text-sm text-gray-400">
           Already have an account?{" "}
-          <Link href="/login" className="font-medium text-[#B4E920] hover:underline">
+          <Link href="/login" className="font-medium text-[#05A653] hover:underline">
             Sign In
           </Link>
         </p>

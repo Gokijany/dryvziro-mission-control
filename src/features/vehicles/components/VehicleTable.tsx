@@ -43,19 +43,19 @@ export function VehicleTable({
               aria-label="Select all vehicles"
             />
           </th>
-          <th className="px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-muted-foreground">
+          <th className="px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-foreground">
             REGISTRATION
           </th>
-          <th className="px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-muted-foreground">
+          <th className="px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-foreground">
             OPERATOR
           </th>
-          <th className="px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-muted-foreground">
+          <th className="px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-foreground">
             STATUS
           </th>
-          <th className="px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-muted-foreground">
+          <th className="px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-foreground">
             TELEMETRY
           </th>
-          <th className="w-24 px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-muted-foreground">
+          <th className="w-24 px-3 py-2.5 text-[10px] font-semibold tracking-[0.08em] text-foreground">
             ACTIONS
           </th>
         </tr>
@@ -93,7 +93,7 @@ export function VehicleTable({
                 <div className="text-[13px] font-semibold text-foreground group-hover:text-primary">
                   {vehicle.license_plate}
                 </div>
-                <div className="text-[11px] text-muted-foreground">
+                <div className="text-[11px] text-foreground">
                   {vehicle.make} {vehicle.model} ({vehicle.year})
                 </div>
               </td>
@@ -119,7 +119,7 @@ export function VehicleTable({
                     type="button"
                     onClick={() => onEdit(vehicle)}
                     aria-label={`Edit ${vehicle.license_plate}`}
-                    className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    className="flex h-7 w-7 items-center justify-center rounded-md text-foreground transition-colors hover:bg-muted hover:text-foreground"
                   >
                     <Pencil className="h-3.5 w-3.5" />
                   </button>
@@ -127,7 +127,7 @@ export function VehicleTable({
                     type="button"
                     onClick={() => onDelete(vehicle)}
                     aria-label={`Delete ${vehicle.license_plate}`}
-                    className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
+                    className="flex h-7 w-7 items-center justify-center rounded-md text-foreground transition-colors hover:bg-destructive/10 hover:text-destructive"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
                   </button>

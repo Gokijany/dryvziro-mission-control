@@ -11,14 +11,16 @@ import { ShieldCheck, Activity, Leaf } from "lucide-react";
 import { useEmissionsData } from "../hooks/useEmissions";
 
 export function EmissionsView() {
-  const [activeTab, setActiveTab] = useState<"REAL-TIME" | "HISTORICAL" | "PROJECTIONS">("REAL-TIME");
+  const [activeTab, setActiveTab] = useState<"REAL-TIME" | "HISTORICAL" | "PROJECTIONS">(
+    "REAL-TIME",
+  );
   const { accountability, forecasts, airQuality, secondaryMetrics, isLoading } = useEmissionsData();
 
   if (isLoading) {
     return (
       <div className="flex flex-1 flex-col">
         <Header title="Emissions Intelligence" />
-        <div className="flex h-96 items-center justify-center text-xs font-semibold text-muted-foreground">
+        <div className="flex h-96 items-center justify-center text-xs font-semibold text-foreground">
           Loading Emissions Intelligence...
         </div>
       </div>
@@ -37,9 +39,7 @@ export function EmissionsView() {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`text-xs font-semibold tracking-wider transition-colors relative pb-1 ${
-                activeTab === tab
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                activeTab === tab ? "text-primary" : "text-foreground hover:text-foreground"
               }`}
             >
               {tab}
@@ -74,11 +74,12 @@ export function EmissionsView() {
         {/* Bottom Grid: Secondary Metric Cards */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           <div className="rounded-xl border border-border/80 bg-card p-5 shadow-sm">
-            <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground mb-3">
+            <div className="flex items-center gap-2 text-xs font-semibold text-foreground mb-3">
               <Activity className="h-4 w-4" /> NOx LEVELS
             </div>
             <div className="text-2xl font-bold text-foreground tracking-tight">
-              {secondaryMetrics.data?.noxLevel.split(" ")[0]} <span className="text-xs font-normal text-muted-foreground">g/kWh</span>
+              {secondaryMetrics.data?.noxLevel.split(" ")[0]}{" "}
+              <span className="text-xs font-normal text-foreground">g/kWh</span>
             </div>
             <div className="mt-2 text-[11px] font-medium text-primary">
               {secondaryMetrics.data?.noxBaseline}
@@ -86,11 +87,12 @@ export function EmissionsView() {
           </div>
 
           <div className="rounded-xl border border-border/80 bg-card p-5 shadow-sm">
-            <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground mb-3">
+            <div className="flex items-center gap-2 text-xs font-semibold text-foreground mb-3">
               <Leaf className="h-4 w-4" /> CO2 OFFSET
             </div>
             <div className="text-2xl font-bold text-foreground tracking-tight">
-              {secondaryMetrics.data?.co2Offset.split(" ")[0]} <span className="text-xs font-normal text-muted-foreground">Tons</span>
+              {secondaryMetrics.data?.co2Offset.split(" ")[0]}{" "}
+              <span className="text-xs font-normal text-foreground">Tons</span>
             </div>
             <div className="mt-2 text-[11px] font-medium text-rose-300">
               {secondaryMetrics.data?.co2Verifier}
@@ -98,13 +100,14 @@ export function EmissionsView() {
           </div>
 
           <div className="rounded-xl border border-border/80 bg-card p-5 shadow-sm">
-            <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground mb-3">
+            <div className="flex items-center gap-2 text-xs font-semibold text-foreground mb-3">
               <ShieldCheck className="h-4 w-4" /> SENSOR FIDELITY
             </div>
             <div className="text-2xl font-bold text-foreground tracking-tight">
-              {secondaryMetrics.data?.sensorFidelity} <span className="text-xs font-normal text-muted-foreground">%</span>
+              {secondaryMetrics.data?.sensorFidelity}{" "}
+              <span className="text-xs font-normal text-foreground">%</span>
             </div>
-            <div className="mt-2 text-[11px] font-medium text-muted-foreground">
+            <div className="mt-2 text-[11px] font-medium text-foreground">
               Active node count: {secondaryMetrics.data?.activeNodes.toLocaleString()}
             </div>
           </div>

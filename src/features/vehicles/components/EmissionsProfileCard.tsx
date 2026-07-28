@@ -15,14 +15,16 @@ export function EmissionsProfileCard({ emissions }: { emissions: EmissionsProfil
           <TrendingUp className="h-4 w-4 text-destructive" />
         )}
       </div>
-      <div className="mt-1 text-[11px] text-muted-foreground">{emissions.impactLabel}</div>
+      <div className="mt-1 text-[11px] text-foreground">{emissions.impactLabel}</div>
 
       <div className="mt-4 flex items-baseline gap-1.5">
-        <span className={`text-3xl font-semibold ${improving ? "text-foreground" : "text-destructive"}`}>
+        <span
+          className={`text-3xl font-semibold ${improving ? "text-foreground" : "text-destructive"}`}
+        >
           {improving ? "" : "+"}
           {emissions.netImpactKgPerDay}
         </span>
-        <span className="text-[12px] text-muted-foreground">kg CO2/day</span>
+        <span className="text-[12px] text-foreground">kg CO2/day</span>
       </div>
 
       <div className="mt-auto flex h-24 items-end gap-2 pt-6">
@@ -32,7 +34,7 @@ export function EmissionsProfileCard({ emissions }: { emissions: EmissionsProfil
               className={`w-full rounded-sm ${improving ? "bg-success/70" : "bg-destructive/60"}`}
               style={{ height: `${Math.max(8, (point.value / maxValue) * 100)}%` }}
             />
-            <span className="text-[9px] text-muted-foreground">{point.label}</span>
+            <span className="text-[9px] text-foreground">{point.label}</span>
           </div>
         ))}
       </div>

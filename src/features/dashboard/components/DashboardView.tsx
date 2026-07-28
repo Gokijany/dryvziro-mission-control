@@ -17,7 +17,7 @@ export function DashboardView() {
     return (
       <div className="flex flex-1 flex-col">
         <Header title="Mission Control" />
-        <div className="flex h-96 items-center justify-center text-xs font-semibold text-muted-foreground">
+        <div className="flex h-96 items-center justify-center text-xs font-semibold text-foreground">
           <Loader2 className="h-5 w-5 animate-spin mr-2" /> Loading Mission Control...
         </div>
       </div>
