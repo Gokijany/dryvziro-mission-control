@@ -16,6 +16,7 @@ export interface Vehicle {
   year: number;
   status: VehicleStatus;
   organization: OrganizationSummary | null;
+  devices: DeviceSummary[];
 }
 
 /** Mirrors PaginatedVehicleResponse. */
@@ -50,4 +51,12 @@ export interface VehicleListParams {
   search?: string;
   skip?: number;
   limit?: number;
+}
+
+export interface DeviceSummary {
+  id: string;
+  device_serial: string;
+  status: string;
+  firmware_version: string | null;
+  last_seen_at: string | null;
 }

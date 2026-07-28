@@ -12,7 +12,7 @@ import {
   type VehicleDetailTab,
 } from "@/features/vehicles/components/VehicleDetailTabs";
 import { VehicleDetailTabPlaceholder } from "@/features/vehicles/components/VehicleDetailTabPlaceholder";
-import { TelemetryPendingPanel } from "@/features/vehicles/components/TelemetryPendingPanel";
+import { TelemetryPendingPanel } from "./TelemetryPendingPanel";
 import { EditVehicleModal } from "@/features/vehicles/components/EditVehicleModal";
 import { DeleteVehicleDialog } from "@/features/vehicles/components/DeleteVehicleDialog";
 import type { Vehicle } from "@/features/vehicles/types/vehicle";
@@ -115,7 +115,7 @@ export function VehicleDetailView({ vehicleId }: VehicleDetailViewProps) {
         <VehicleDetailTabs activeTab={activeTab} onChange={setActiveTab} />
 
         {activeTab === "overview" ? (
-          <TelemetryPendingPanel />
+          <TelemetryPendingPanel devices={vehicle.devices ?? []} />
         ) : (
           <VehicleDetailTabPlaceholder tabLabel={TAB_LABELS[activeTab]} />
         )}
