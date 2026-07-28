@@ -11,14 +11,16 @@ export function RecentExportsTable({ exportsList }: Props) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h2 className="text-sm font-semibold text-foreground">Recent Exports</h2>
-          <span className="rounded-full bg-background border border-border px-2.5 py-0.5 text-[10px] font-semibold text-muted-foreground">LAST 30 DAYS</span>
+          <span className="rounded-full bg-background border border-border px-2.5 py-0.5 text-[10px] font-semibold text-foreground">
+            LAST 30 DAYS
+          </span>
         </div>
       </div>
 
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-border/60 text-[10px] font-bold tracking-wider text-muted-foreground">
+            <tr className="border-b border-border/60 text-[10px] font-bold tracking-wider text-foreground">
               <th className="py-3 px-4">FILENAME / REPORT</th>
               <th className="py-3 px-4">MODULES</th>
               <th className="py-3 px-4">FORMAT</th>
@@ -32,24 +34,29 @@ export function RecentExportsTable({ exportsList }: Props) {
               <tr key={item.id} className="hover:bg-background/40 transition-colors">
                 <td className="py-4 px-4">
                   <div className="font-bold text-foreground">{item.filename}</div>
-                  <div className="text-[10px] text-muted-foreground mt-0.5">{item.filesize}</div>
+                  <div className="text-[10px] text-foreground mt-0.5">{item.filesize}</div>
                 </td>
                 <td className="py-4 px-4">
                   <div className="flex flex-wrap gap-1.5">
                     {item.modules.map((mod, idx) => (
-                      <span key={idx} className="rounded bg-background border border-border px-2 py-0.5 text-[9px] font-bold text-muted-foreground">
+                      <span
+                        key={idx}
+                        className="rounded bg-background border border-border px-2 py-0.5 text-[9px] font-bold text-foreground"
+                      >
                         {mod}
                       </span>
                     ))}
                   </div>
                 </td>
                 <td className="py-4 px-4 font-medium text-foreground">{item.format}</td>
-                <td className="py-4 px-4 text-muted-foreground whitespace-pre-line">{item.generatedBy}</td>
-                <td className="py-4 px-4 text-muted-foreground whitespace-pre-line">{item.date}</td>
+                <td className="py-4 px-4 text-foreground whitespace-pre-line">
+                  {item.generatedBy}
+                </td>
+                <td className="py-4 px-4 text-foreground whitespace-pre-line">{item.date}</td>
                 <td className="py-4 px-4 text-right">
-                  <button 
-                    type="button" 
-                    className="rounded-md p-2 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors inline-flex items-center justify-center"
+                  <button
+                    type="button"
+                    className="rounded-md p-2 text-foreground hover:bg-primary/10 hover:text-primary transition-colors inline-flex items-center justify-center"
                     aria-label={`Download ${item.filename}`}
                   >
                     <Download className="h-4 w-4" />
@@ -62,7 +69,10 @@ export function RecentExportsTable({ exportsList }: Props) {
       </div>
 
       <div className="pt-2 text-center border-t border-border/40">
-        <button type="button" className="text-[11px] font-bold text-muted-foreground hover:text-foreground tracking-wider transition-colors">
+        <button
+          type="button"
+          className="text-[11px] font-bold text-foreground hover:text-foreground tracking-wider transition-colors"
+        >
           SHOW MORE RECENT ACTIVITY
         </button>
       </div>

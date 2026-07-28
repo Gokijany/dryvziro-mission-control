@@ -24,7 +24,7 @@ function FilterDropdown({ label }: { label: string }) {
   return (
     <button
       type="button"
-      className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-[12px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+      className="flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-[12px] font-medium text-foreground transition-colors hover:text-foreground"
     >
       {label}
       <ChevronDown className="h-3.5 w-3.5" />
@@ -49,8 +49,8 @@ export function VehicleFilters({ value, onChange, onAddVehicle }: VehicleFilters
             onClick={() => onChange({ ...value, view: "active" })}
             className={`rounded-md px-3 py-1.5 text-[12px] font-medium transition-colors ${
               value.view === "active"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground"
+                ? "bg-primary text-foreground"
+                : "text-foreground hover:text-foreground"
             }`}
           >
             Active
@@ -60,8 +60,8 @@ export function VehicleFilters({ value, onChange, onAddVehicle }: VehicleFilters
             onClick={() => onChange({ ...value, view: "archive" })}
             className={`rounded-md px-3 py-1.5 text-[12px] font-medium transition-colors ${
               value.view === "archive"
-                ? "bg-primary text-primary-foreground"
-                : "text-muted-foreground hover:text-foreground"
+                ? "bg-primary text-foreground"
+                : "text-foreground hover:text-foreground"
             }`}
           >
             Archive
@@ -71,7 +71,7 @@ export function VehicleFilters({ value, onChange, onAddVehicle }: VehicleFilters
         <button
           type="button"
           onClick={onAddVehicle}
-          className="flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-[12px] font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+          className="flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-[12px] font-semibold text-foreground transition-opacity hover:opacity-90"
         >
           <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
           Add Vehicle

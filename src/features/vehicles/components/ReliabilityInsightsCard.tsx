@@ -9,7 +9,7 @@ export function ReliabilityInsightsCard({ message, reportHref }: ReliabilityInsi
   return (
     <div className="flex h-full flex-col rounded-xl border border-border bg-card p-5">
       <div className="flex items-center justify-between">
-        <div className="text-[10px] font-semibold tracking-widest text-muted-foreground">
+        <div className="text-[10px] font-semibold tracking-widest text-foreground">
           RELIABILITY INSIGHTS
         </div>
         <Sparkles className="h-4 w-4 text-primary" />

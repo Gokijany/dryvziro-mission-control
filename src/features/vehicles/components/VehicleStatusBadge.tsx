@@ -9,7 +9,7 @@ const STATUS_LABEL: Record<VehicleStatus, string> = {
 
 const STATUS_CLASS: Record<VehicleStatus, string> = {
   active: "bg-success/15 text-success",
-  inactive: "bg-muted text-muted-foreground",
+  inactive: "bg-muted text-foreground",
   maintenance: "bg-warning/15 text-warning",
   decommissioned: "bg-destructive/15 text-destructive",
 };

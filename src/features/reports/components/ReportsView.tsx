@@ -15,7 +15,7 @@ export function ReportsView() {
     return (
       <div className="flex flex-1 flex-col">
         <Header title="Reports & Compliance" />
-        <div className="flex h-96 items-center justify-center text-xs font-semibold text-muted-foreground">
+        <div className="flex h-96 items-center justify-center text-xs font-semibold text-foreground">
           <Loader2 className="h-5 w-5 animate-spin mr-2" /> Loading Reports & Compliance...
         </div>
       </div>
@@ -26,7 +26,7 @@ export function ReportsView() {
     <div className="flex flex-1 flex-col">
       <div className="flex items-center justify-between border-b border-border/80 px-4 sm:px-6 lg:px-8 py-4">
         <Header title="Reports & Compliance" searchPlaceholder="Search audit logs..." />
-        <div className="hidden sm:flex items-center gap-2 rounded-full border border-border/80 bg-card px-3 py-1 text-[11px] font-medium text-muted-foreground ml-4 shrink-0">
+        <div className="hidden sm:flex items-center gap-2 rounded-full border border-border/80 bg-card px-3 py-1 text-[11px] font-medium text-foreground ml-4 shrink-0">
           <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
           LIVE AUDIT SYNC ACTIVE
         </div>
@@ -50,11 +50,15 @@ export function ReportsView() {
         <RecentExportsTable exportsList={data.recentExports} />
 
         {/* Footer info */}
-        <div className="flex flex-col sm:flex-row items-center justify-between border-t border-border/40 pt-6 text-[10px] font-medium text-muted-foreground">
+        <div className="flex flex-col sm:flex-row items-center justify-between border-t border-border/40 pt-6 text-[10px] font-medium text-foreground">
           <span>DRYVZIRO COMPLIANCE ENGINE v4.2.1</span>
           <div className="flex items-center gap-6 mt-2 sm:mt-0">
-            <span className="hover:text-foreground cursor-pointer transition-colors">ENCRYPTION PROTOCOL</span>
-            <span className="hover:text-foreground cursor-pointer transition-colors">AUDIT PRIVACY</span>
+            <span className="hover:text-foreground cursor-pointer transition-colors">
+              ENCRYPTION PROTOCOL
+            </span>
+            <span className="hover:text-foreground cursor-pointer transition-colors">
+              AUDIT PRIVACY
+            </span>
             <span className="hover:text-foreground cursor-pointer transition-colors">API DOCS</span>
           </div>
         </div>

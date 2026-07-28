@@ -19,7 +19,7 @@ export function EmissionsHotspotsCard({ message }: EmissionsHotspotsCardProps) {
   return (
     <div className="flex h-full flex-col rounded-xl border border-border bg-card p-5">
       <div className="flex items-center justify-between">
-        <div className="text-[10px] font-semibold tracking-widest text-muted-foreground">
+        <div className="text-[10px] font-semibold tracking-widest text-foreground">
           EMISSIONS HOTSPOTS
         </div>
         <MapPin className="h-4 w-4 text-primary" />
@@ -41,7 +41,7 @@ export function EmissionsHotspotsCard({ message }: EmissionsHotspotsCardProps) {
         ))}
       </div>
 
-      <p className="mt-3 text-[12px] leading-relaxed text-muted-foreground">{message}</p>
+      <p className="mt-3 text-[12px] leading-relaxed text-foreground">{message}</p>
     </div>
   );
 }

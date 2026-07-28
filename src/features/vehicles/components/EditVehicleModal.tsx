@@ -79,10 +79,7 @@ export function EditVehicleModal({ vehicle, onClose }: EditVehicleModalProps) {
   const onSubmit = (values: UpdateVehicleFormValues) => {
     if (!vehicle) return;
 
-    updateVehicle.mutate(
-      { id: vehicle.id, payload: values },
-      { onSuccess: () => onClose() },
-    );
+    updateVehicle.mutate({ id: vehicle.id, payload: values }, { onSuccess: () => onClose() });
   };
 
   return (
@@ -129,7 +126,9 @@ export function EditVehicleModal({ vehicle, onClose }: EditVehicleModalProps) {
               {...register("make")}
               className="mt-1.5 w-full rounded-lg border border-input bg-background px-3 py-2 text-[13px] text-foreground outline-none focus:border-primary/50"
             />
-            {errors.make && <p className="mt-1 text-[11px] text-destructive">{errors.make.message}</p>}
+            {errors.make && (
+              <p className="mt-1 text-[11px] text-destructive">{errors.make.message}</p>
+            )}
           </div>
           <div>
             <label htmlFor="edit_model" className="text-[12px] font-medium text-foreground">
@@ -157,7 +156,9 @@ export function EditVehicleModal({ vehicle, onClose }: EditVehicleModalProps) {
               {...register("year", { valueAsNumber: true })}
               className="mt-1.5 w-full rounded-lg border border-input bg-background px-3 py-2 text-[13px] text-foreground outline-none focus:border-primary/50"
             />
-            {errors.year && <p className="mt-1 text-[11px] text-destructive">{errors.year.message}</p>}
+            {errors.year && (
+              <p className="mt-1 text-[11px] text-destructive">{errors.year.message}</p>
+            )}
           </div>
           <div>
             <label htmlFor="edit_status" className="text-[12px] font-medium text-foreground">
@@ -185,7 +186,7 @@ export function EditVehicleModal({ vehicle, onClose }: EditVehicleModalProps) {
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg px-3.5 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="rounded-lg px-3.5 py-2 text-[13px] font-medium text-foreground transition-colors hover:text-foreground"
           >
             Cancel
           </button>

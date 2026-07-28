@@ -7,7 +7,7 @@ function ProgressRow({ label, percent }: { label: string; percent: number }) {
   return (
     <div>
       <div className="flex items-center justify-between text-[11px]">
-        <span className="text-muted-foreground">{label}</span>
+        <span className="text-foreground">{label}</span>
         <span className="font-medium text-foreground">{percent}%</span>
       </div>
       <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-muted">
@@ -35,7 +35,7 @@ export function MaintenanceHealthCard({ maintenance }: { maintenance: Maintenanc
         )}
       </div>
 
-      <div className="mt-4 text-[10px] font-semibold tracking-widest text-muted-foreground">
+      <div className="mt-4 text-[10px] font-semibold tracking-widest text-foreground">
         {maintenance.alertLabel}
       </div>
       <div className="mt-1 text-[13px] font-medium text-foreground">
