@@ -22,9 +22,7 @@ const STAGES: { id: ComingSoonStage; label: string }[] = [
 ];
 
 function deriveModuleCode(pageName: string): string {
-  const sum = pageName
-    .split("")
-    .reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const sum = pageName.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
   return `MOD-${String((sum % 89) + 10).padStart(2, "0")}`;
 }
 
@@ -57,11 +55,11 @@ export function ComingSoonPage({
             </span>
           </div>
 
-          <div className="font-mono text-[10px] font-medium tracking-widest text-muted-foreground">
+          <div className="font-mono text-[10px] font-medium tracking-widest text-foreground">
             {code} · STANDBY
           </div>
           <h2 className="mt-2 text-xl font-semibold text-foreground">{pageName}</h2>
-          <p className="mx-auto mt-2 max-w-xs text-[13px] leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-2 max-w-xs text-[13px] leading-relaxed text-foreground">
             This module hasn&apos;t been provisioned yet. {description}
           </p>
 
@@ -72,16 +70,12 @@ export function ComingSoonPage({
                 <div className="flex flex-col items-center gap-1.5">
                   <span
                     className={`h-2 w-2 rounded-full ${
-                      i < stageIndex
-                        ? "bg-success"
-                        : i === stageIndex
-                          ? "bg-primary"
-                          : "bg-muted"
+                      i < stageIndex ? "bg-success" : i === stageIndex ? "bg-primary" : "bg-muted"
                     } ${i === stageIndex ? "ring-4 ring-primary/20" : ""}`}
                   />
                   <span
                     className={`text-[9px] font-medium tracking-wide ${
-                      i <= stageIndex ? "text-foreground" : "text-muted-foreground"
+                      i <= stageIndex ? "text-foreground" : "text-foreground"
                     }`}
                   >
                     {s.label}
@@ -100,7 +94,7 @@ export function ComingSoonPage({
 
           <Link
             href={backHref}
-            className="mt-8 inline-flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="mt-8 inline-flex items-center gap-1.5 text-[12px] font-medium text-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             {backLabel}

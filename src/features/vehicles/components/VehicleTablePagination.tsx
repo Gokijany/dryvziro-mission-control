@@ -39,7 +39,7 @@ export function VehicleTablePagination({
 
   return (
     <div className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-      <div className="flex items-center gap-2 text-[12px] text-muted-foreground">
+      <div className="flex items-center gap-2 text-[12px] text-foreground">
         <span>Items per page</span>
         <button
           type="button"
@@ -56,14 +56,14 @@ export function VehicleTablePagination({
           type="button"
           disabled={currentPage === 1}
           onClick={() => onPageChange(currentPage - 1)}
-          className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground disabled:opacity-30"
+          className="flex h-7 w-7 items-center justify-center rounded-md text-foreground transition-colors hover:text-foreground disabled:opacity-30"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
 
         {pageWindow.map((page, i) =>
           page === "ellipsis" ? (
-            <span key={`ellipsis-${i}`} className="px-1.5 text-[12px] text-muted-foreground">
+            <span key={`ellipsis-${i}`} className="px-1.5 text-[12px] text-foreground">
               …
             </span>
           ) : (
@@ -74,19 +74,19 @@ export function VehicleTablePagination({
               className={`flex h-7 w-7 items-center justify-center rounded-md text-[12px] font-medium transition-colors ${
                 page === currentPage
                   ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-foreground hover:text-foreground"
               }`}
             >
               {page}
             </button>
-          )
+          ),
         )}
 
         <button
           type="button"
           disabled={currentPage === totalPages}
           onClick={() => onPageChange(currentPage + 1)}
-          className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:text-foreground disabled:opacity-30"
+          className="flex h-7 w-7 items-center justify-center rounded-md text-foreground transition-colors hover:text-foreground disabled:opacity-30"
         >
           <ChevronRight className="h-4 w-4" />
         </button>

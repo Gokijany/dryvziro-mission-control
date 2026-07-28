@@ -48,9 +48,9 @@ export function DeleteVehicleDialog({ vehicle, onClose, onDeleted }: DeleteVehic
             <AlertTriangle className="h-4.5 w-4.5 text-destructive" />
           </div>
           <p className="text-[13px] leading-relaxed text-foreground">
-            Remove <span className="font-semibold">{vehicle?.license_plate}</span> from the
-            active fleet? It will be archived, not permanently erased — an administrator can
-            restore it later if needed.
+            Remove <span className="font-semibold">{vehicle?.license_plate}</span> from the active
+            fleet? It will be archived, not permanently erased — an administrator can restore it
+            later if needed.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export function DeleteVehicleDialog({ vehicle, onClose, onDeleted }: DeleteVehic
           <button
             type="button"
             onClick={onClose}
-            className="rounded-lg px-3.5 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="rounded-lg px-3.5 py-2 text-[13px] font-medium text-foreground transition-colors hover:text-foreground"
           >
             Cancel
           </button>

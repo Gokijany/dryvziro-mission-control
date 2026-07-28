@@ -23,6 +23,7 @@ import {
   X,
 } from "lucide-react";
 import { useSidebar } from "./SidebarContext";
+import Image from "next/image";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement>>;
 
@@ -36,20 +37,21 @@ interface NavItem {
 const MAIN_NAV: NavItem[] = [
   { label: "Mission Control", href: "/dashboard", icon: LayoutGrid },
   { label: "Vehicles", href: "/vehicles", icon: Truck },
-  { label: "Trips", href: "/trips", icon: RouteIcon },
-  { label: "Drivers", href: "/drivers", icon: Users },
-  { label: "Routes", href: "/routes", icon: Map },
+  { label: "Devices", href: "/devices", icon: Truck },
+  // { label: "Trips", href: "/trips", icon: RouteIcon },
+  // { label: "Drivers", href: "/drivers", icon: Users },
+  // { label: "Routes", href: "/routes", icon: Map },
   { label: "Emissions", href: "/emissions", icon: Wind },
-  { label: "Fuel", href: "/fuel", icon: Fuel },
-  { label: "Maintenance", href: "/maintenance", icon: Wrench },
-  { label: "Climate AI", href: "/climate-ai", icon: Sparkles },
-  { label: "Analytics", href: "/analytics", icon: BarChart3 },
+  // { label: "Fuel", href: "/fuel", icon: Fuel },
+  // { label: "Maintenance", href: "/maintenance", icon: Wrench },
+  // { label: "Climate AI", href: "/climate-ai", icon: Sparkles },
+  // { label: "Analytics", href: "/analytics", icon: BarChart3 },
   { label: "Reports", href: "/reports", icon: FileText },
 ];
 
 const BOTTOM_NAV: NavItem[] = [
-  { label: "Notifications", href: "/notifications", icon: Bell },
-  { label: "Settings", href: "/settings", icon: Settings },
+  // { label: "Notifications", href: "/notifications", icon: Bell },
+  // { label: "Settings", href: "/settings", icon: Settings },
   { label: "Administrator", href: "/administrator", icon: UserCircle2 },
 ];
 
@@ -64,8 +66,8 @@ export function Sidebar({ systemHealth = 100 }: SidebarProps) {
   const { user } = useAuth();
 
   const bottomNav: NavItem[] = [
-    { label: "Notifications", href: "/notifications", icon: Bell },
-    { label: "Settings", href: "/settings", icon: Settings },
+    // { label: "Notifications", href: "/notifications", icon: Bell },
+    // { label: "Settings", href: "/settings", icon: Settings },
     {
       label: user?.full_name ?? "Account",
       href: "/administrator",
@@ -85,7 +87,7 @@ export function Sidebar({ systemHealth = 100 }: SidebarProps) {
         onClick={closeSidebar}
         className={`flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors ${
           active
-            ? "bg-sidebar-primary text-sidebar-primary-foreground"
+            ? "bg-sidebar-primary text-foreground"
             : "text-sidebar-foreground/55 hover:bg-sidebar-accent hover:text-sidebar-foreground/85"
         }`}
       >
@@ -114,12 +116,17 @@ export function Sidebar({ systemHealth = 100 }: SidebarProps) {
         {/* Logo */}
         <div className="mb-8 flex items-center justify-between px-2">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-sidebar-primary">
-              <Leaf className="h-4.5 w-4.5 text-sidebar-primary-foreground" strokeWidth={2.5} />
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md">
+               <Image
+                src="/logo.png"
+                alt="Company Logo"
+                width={500}
+                height={100}
+              />
             </div>
             <div className="leading-tight">
               <div className="text-[15px] font-semibold text-primary">Dryvziro</div>
-              <div className="text-[9px] font-medium tracking-widest text-sidebar-foreground/35">
+              <div className="text-[9px] font-medium tracking-widest text-foreground">
                 CLIMATE INTELLIGENCE
               </div>
             </div>

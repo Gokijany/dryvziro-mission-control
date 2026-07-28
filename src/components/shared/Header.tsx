@@ -99,7 +99,7 @@ export function Header({
         </div>
 
         <div className="flex items-center gap-3">
-          {actions.map((action) => (
+          {/* {actions.map((action) => (
             <button
               key={action.label}
               type="button"
@@ -109,7 +109,7 @@ export function Header({
             >
               {action.icon}
             </button>
-          ))}
+          ))} */}
 
           <div ref={menuRef} className="relative">
             <button

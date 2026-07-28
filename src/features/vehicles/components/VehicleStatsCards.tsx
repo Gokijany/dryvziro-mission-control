@@ -11,7 +11,7 @@ export function VehicleStatsCards({ totalVehicles, activeVehicles }: VehicleStat
       {/* Total Fleet */}
       <div className="flex items-start justify-between rounded-xl border border-border bg-card p-5">
         <div>
-          <div className="text-[10px] font-semibold tracking-widest text-muted-foreground">
+          <div className="text-[10px] font-semibold tracking-widest text-foreground">
             TOTAL FLEET
           </div>
           <div className="mt-2 flex items-baseline gap-1.5">
@@ -22,44 +22,44 @@ export function VehicleStatsCards({ totalVehicles, activeVehicles }: VehicleStat
               {activeVehicles.toLocaleString()} Active
             </span>
           </div>
-          <div className="mt-2 text-[11px] text-muted-foreground">
+          <div className="mt-2 text-[11px] text-foreground">
             Registered vehicles across your organization.
           </div>
         </div>
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted">
-          <Monitor className="h-4.5 w-4.5 text-muted-foreground" strokeWidth={1.75} />
+          <Monitor className="h-4.5 w-4.5 text-foreground" strokeWidth={1.75} />
         </div>
       </div>
 
       {/* Fleet Health - pending telemetry integration */}
       <div className="rounded-xl border border-border bg-card p-5">
         <div className="flex items-start justify-between">
-          <div className="text-[10px] font-semibold tracking-widest text-muted-foreground">
+          <div className="text-[10px] font-semibold tracking-widest text-foreground">
             FLEET HEALTH
           </div>
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted">
-            <HeartPulse className="h-4.5 w-4.5 text-muted-foreground" strokeWidth={1.75} />
+            <HeartPulse className="h-4.5 w-4.5 text-foreground" strokeWidth={1.75} />
           </div>
         </div>
-        <div className="mt-2 text-2xl font-semibold text-muted-foreground">—</div>
-        <div className="mt-2 text-[11px] text-muted-foreground">
+        <div className="mt-2 text-2xl font-semibold text-foreground">—</div>
+        {/* <div className="mt-2 text-[11px] text-foreground">
           Awaiting device/telemetry integration.
-        </div>
+        </div> */}
       </div>
 
       {/* Avg Emissions - pending telemetry integration */}
       <div className="flex items-start justify-between rounded-xl border border-border bg-card p-5">
         <div>
-          <div className="text-[10px] font-semibold tracking-widest text-muted-foreground">
+          <div className="text-[10px] font-semibold tracking-widest text-foreground">
             AVG EMISSIONS
           </div>
-          <div className="mt-2 text-2xl font-semibold text-muted-foreground">—</div>
-          <div className="mt-2 text-[11px] text-muted-foreground">
+          <div className="mt-2 text-2xl font-semibold text-foreground">—</div>
+          {/* <div className="mt-2 text-[11px] text-foreground">
             Awaiting device/telemetry integration.
-          </div>
+          </div> */}
         </div>
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted">
-          <Wind className="h-4.5 w-4.5 text-muted-foreground" strokeWidth={1.75} />
+          <Wind className="h-4.5 w-4.5 text-foreground" strokeWidth={1.75} />
         </div>
       </div>
     </div>

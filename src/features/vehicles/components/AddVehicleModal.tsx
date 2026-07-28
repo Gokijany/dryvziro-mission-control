@@ -107,7 +107,8 @@ export function AddVehicleModal({ open, onClose }: AddVehicleModalProps) {
   // rather than silently submitting an empty organization_id.
   const accountHasNoOrg = !crossOrg && !user?.organization_id;
 
-  const noOrganizationsAvailable = crossOrg && !organizationsQuery.isLoading && organizations.length === 0;
+  const noOrganizationsAvailable =
+    crossOrg && !organizationsQuery.isLoading && organizations.length === 0;
 
   return (
     <Modal
@@ -142,7 +143,7 @@ export function AddVehicleModal({ open, onClose }: AddVehicleModalProps) {
                 ))}
               </select>
               {organizationsQuery.isLoading && (
-                <p className="mt-1 text-[11px] text-muted-foreground">Loading organizations...</p>
+                <p className="mt-1 text-[11px] text-foreground">Loading organizations...</p>
               )}
               {errors.organization_id && (
                 <p className="mt-1 text-[11px] text-destructive">
@@ -155,9 +156,7 @@ export function AddVehicleModal({ open, onClose }: AddVehicleModalProps) {
                 </p>
               )}
               {noOrganizationsAvailable && (
-                <p className="mt-1 text-[11px] text-muted-foreground">
-                  No organizations exist yet.
-                </p>
+                <p className="mt-1 text-[11px] text-foreground">No organizations exist yet.</p>
               )}
             </div>
           )}
@@ -187,7 +186,9 @@ export function AddVehicleModal({ open, onClose }: AddVehicleModalProps) {
               placeholder="1HGCM82633A004352"
               className="mt-1.5 w-full rounded-lg border border-input bg-background px-3 py-2 text-[13px] text-foreground outline-none focus:border-primary/50"
             />
-            {errors.vin && <p className="mt-1 text-[11px] text-destructive">{errors.vin.message}</p>}
+            {errors.vin && (
+              <p className="mt-1 text-[11px] text-destructive">{errors.vin.message}</p>
+            )}
           </div>
 
           <div className="grid grid-cols-2 gap-3">
@@ -201,7 +202,9 @@ export function AddVehicleModal({ open, onClose }: AddVehicleModalProps) {
                 placeholder="Scania"
                 className="mt-1.5 w-full rounded-lg border border-input bg-background px-3 py-2 text-[13px] text-foreground outline-none focus:border-primary/50"
               />
-              {errors.make && <p className="mt-1 text-[11px] text-destructive">{errors.make.message}</p>}
+              {errors.make && (
+                <p className="mt-1 text-[11px] text-destructive">{errors.make.message}</p>
+              )}
             </div>
             <div>
               <label htmlFor="model" className="text-[12px] font-medium text-foreground">
@@ -230,7 +233,9 @@ export function AddVehicleModal({ open, onClose }: AddVehicleModalProps) {
                 {...register("year", { valueAsNumber: true })}
                 className="mt-1.5 w-full rounded-lg border border-input bg-background px-3 py-2 text-[13px] text-foreground outline-none focus:border-primary/50"
               />
-              {errors.year && <p className="mt-1 text-[11px] text-destructive">{errors.year.message}</p>}
+              {errors.year && (
+                <p className="mt-1 text-[11px] text-destructive">{errors.year.message}</p>
+              )}
             </div>
             <div>
               <label htmlFor="status" className="text-[12px] font-medium text-foreground">
@@ -250,13 +255,15 @@ export function AddVehicleModal({ open, onClose }: AddVehicleModalProps) {
             </div>
           </div>
 
-          {createVehicle.isError && <FormErrorBanner>{getErrorMessage(createVehicle.error)}</FormErrorBanner>}
+          {createVehicle.isError && (
+            <FormErrorBanner>{getErrorMessage(createVehicle.error)}</FormErrorBanner>
+          )}
 
           <div className="flex items-center justify-end gap-2 pt-2">
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg px-3.5 py-2 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="rounded-lg px-3.5 py-2 text-[13px] font-medium text-foreground transition-colors hover:text-foreground"
             >
               Cancel
             </button>

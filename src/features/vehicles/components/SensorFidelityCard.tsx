@@ -10,7 +10,7 @@ const ROW_ICON: Record<string, typeof Radar> = {
 function toneClasses(tone: SensorTone) {
   return tone === "success"
     ? { box: "bg-success/15", icon: "text-success" }
-    : { box: "bg-muted", icon: "text-muted-foreground" };
+    : { box: "bg-muted", icon: "text-foreground" };
 }
 
 export function SensorFidelityCard({ sensors }: { sensors: SensorReading[] }) {
@@ -18,7 +18,7 @@ export function SensorFidelityCard({ sensors }: { sensors: SensorReading[] }) {
     <div className="flex h-full flex-col rounded-xl border border-border bg-card p-5">
       <div className="flex items-center justify-between">
         <div className="text-[13px] font-medium text-foreground">Sensor Fidelity</div>
-        <Radar className="h-4 w-4 text-muted-foreground" />
+        <Radar className="h-4 w-4 text-foreground" />
       </div>
 
       <div className="mt-4 space-y-4">
@@ -27,17 +27,19 @@ export function SensorFidelityCard({ sensors }: { sensors: SensorReading[] }) {
           const tones = toneClasses(sensor.tone);
           return (
             <div key={sensor.id} className="flex items-center gap-3">
-              <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${tones.box}`}>
+              <div
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${tones.box}`}
+              >
                 <Icon className={`h-4 w-4 ${tones.icon}`} strokeWidth={1.75} />
               </div>
               <div>
-                <div className="text-[9px] font-semibold tracking-widest text-muted-foreground">
+                <div className="text-[9px] font-semibold tracking-widest text-foreground">
                   {sensor.label}
                 </div>
                 <div className="text-[13px] font-medium text-foreground">
                   {sensor.value}{" "}
                   {sensor.sublabel && (
-                    <span className="text-[11px] font-normal text-muted-foreground">
+                    <span className="text-[11px] font-normal text-foreground">
                       {sensor.sublabel}
                     </span>
                   )}

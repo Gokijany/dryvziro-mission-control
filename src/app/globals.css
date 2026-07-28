@@ -54,7 +54,7 @@
 
 :root {
   /* Dryvziro brand palette */
-  --lime: #aee420;
+  --lime: #05A653;
   --lime-dark: #76a427;
   --forest-950: #131b15;
   --forest-800: #2a3b29;
@@ -63,6 +63,7 @@
   --amber: #e17f25;
   --green-mid: #41702e;
   --rust: #553527;
+  --fore: #ffffff;
 
   /* Dryvziro is a dark-only product (no light theme), so :root and .dark share one palette */
   --background: var(--forest-950);
@@ -83,7 +84,7 @@
   --success-foreground: oklch(0.985 0 0);
   --warning: var(--amber);
   --warning-foreground: var(--forest-950);
-  --destructive: var(--rust);
+  --destructive: var(--fore);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 12%);
   --ring: var(--lime);
@@ -122,7 +123,7 @@
   --success-foreground: oklch(0.985 0 0);
   --warning: var(--amber);
   --warning-foreground: var(--forest-950);
-  --destructive: var(--rust);
+  --destructive: var(--fore);
   --border: oklch(1 0 0 / 8%);
   --input: oklch(1 0 0 / 12%);
   --ring: var(--lime);
