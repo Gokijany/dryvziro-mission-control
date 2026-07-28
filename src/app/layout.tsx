@@ -1,3 +1,4 @@
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import type { Metadata } from "next";
 import QueryProvider from "@/providers/QueryProvider";
@@ -7,6 +8,13 @@ export const metadata: Metadata = {
   description: "Vehicle Intelligence Platform",
 };
 
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "500", "700", "900"],
+  variable: "--font-roboto",
+  display: "swap",
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -14,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body>
+      <body className={`${roboto.variable} font-sans`}>
         <QueryProvider>
           {children}
         </QueryProvider>
