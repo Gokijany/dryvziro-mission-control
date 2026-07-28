@@ -1,9 +1,4 @@
-import {
-  keepPreviousData,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import {
   createVehicle,
@@ -34,13 +29,6 @@ export function useVehicles(params: VehicleListParams = {}) {
   });
 }
 
-export function useVehicle(id: string | undefined) {
-  return useQuery({
-    queryKey: vehicleKeys.detail(id ?? ""),
-    queryFn: () => fetchVehicleById(id as string),
-    enabled: Boolean(id),
-  });
-}
 
 export function useCreateVehicle() {
   const queryClient = useQueryClient();
@@ -75,5 +63,12 @@ export function useDeleteVehicle() {
       queryClient.invalidateQueries({ queryKey: vehicleKeys.lists() });
       queryClient.removeQueries({ queryKey: vehicleKeys.detail(id) });
     },
+  });
+}
+export function useVehicle(id: string | null | undefined) {
+  return useQuery({
+    queryKey: vehicleKeys.detail(id ?? ""),
+    queryFn: () => fetchVehicleById(id as string),
+    enabled: Boolean(id),
   });
 }

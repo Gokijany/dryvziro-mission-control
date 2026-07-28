@@ -111,7 +111,7 @@ export function VehicleTable({
                 <VehicleStatusBadge status={vehicle.status} />
               </td>
               <td className="px-3 py-3">
-                <TelemetryPendingBadge />
+                <TelemetryPendingBadge devices={vehicle.devices} />
               </td>
               <td className="px-3 py-3 text-right" onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-end gap-1">

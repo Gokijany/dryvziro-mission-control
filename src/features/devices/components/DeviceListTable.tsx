@@ -1,5 +1,6 @@
 import type { DeviceResponse, DeviceStatus } from "../types/devices";
 import { Link2, Unlink, ShieldCheck, Cpu } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface Props {
   devices: DeviceResponse[];
@@ -7,6 +8,12 @@ interface Props {
 }
 
 export function DeviceListTable({ devices, onOpenAssignModal }: Props) {
+  const router = useRouter();
+
+
+  const goToDetail=(device:DeviceResponse)=>{
+  router.push(`/devices/${device.id}`);
+  }
   const getStatusBadge = (status: DeviceStatus) => {
     switch (status) {
       case "ACTIVE":
@@ -65,7 +72,19 @@ export function DeviceListTable({ devices, onOpenAssignModal }: Props) {
           </thead>
           <tbody className="divide-y divide-border/40 text-xs">
             {devices.map((device) => (
-              <tr key={device.id} className="hover:bg-background/40 transition-colors">
+              <tr
+                key={device.id}
+                role="link"
+                tabIndex={0}
+                onClick={() => goToDetail(device)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    goToDetail(device);
+                  }
+                }}
+                className="group cursor-pointer hover:bg-muted/40 transition-colors"
+              >
                 <td className="py-4 px-4 font-mono font-bold text-foreground">
                   {device.device_serial}
                 </td>
@@ -88,7 +107,7 @@ export function DeviceListTable({ devices, onOpenAssignModal }: Props) {
                 <td className="py-4 px-4 text-foreground">
                   {device.last_seen_at ? new Date(device.last_seen_at).toLocaleString() : "Never"}
                 </td>
-                <td className="py-4 px-4 text-right">
+                <td className="py-4 px-4 text-right" onClick={(e) => e.stopPropagation()}>
                   {device.status !== "DECOMMISSIONED" && (
                     <button
                       onClick={() => onOpenAssignModal(device)}
