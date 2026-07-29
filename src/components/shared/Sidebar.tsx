@@ -46,7 +46,7 @@ const MAIN_NAV: NavItem[] = [
   // { label: "Maintenance", href: "/maintenance", icon: Wrench },
   // { label: "Climate AI", href: "/climate-ai", icon: Sparkles },
   { label: "Organizations", href: "/organizations", icon: Users },
-  // { label: "Analytics", href: "/analytics", icon: BarChart3 },
+  { label: "Analytics", href: "/analytics", icon: BarChart3 },
   { label: "Reports", href: "/reports", icon: FileText },
 ];
 
@@ -114,35 +114,42 @@ export function Sidebar({ systemHealth = 100 }: SidebarProps) {
           isMobileOpen ? "translate-x-0" : ""
         }`}
       >
-        {/* Logo */}
-        <div className="mb-8 flex items-center justify-between px-2">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md">
-               <Image
-                src="/logo.png"
-                alt="Company Logo"
-                width={500}
-                height={100}
-              />
-            </div>
-            <div className="leading-tight">
-              <div className="text-[15px] font-semibold text-primary">Dryvziro</div>
-              <div className="text-[9px] font-medium tracking-widest text-foreground">
-                CLIMATE INTELLIGENCE
-              </div>
-            </div>
-          </div>
+     {/* Logo */}
+<div className="mb-8 flex items-center justify-between px-2">
+  <div className="flex flex-1 items-center gap-3 min-w-0">
+    {/* Logo */}
+    <div className="relative h-[4.25rem] w-[4.25rem] shrink-0">
+      <Image
+        src="/logo.png"
+        alt="Company Logo"
+        fill
+        className="object-contain"
+        priority
+      />
+    </div>
 
-          <button
-            type="button"
-            onClick={closeSidebar}
-            aria-label="Close menu"
-            className="flex h-8 w-8 items-center justify-center rounded-md text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground lg:hidden"
-          >
-            <X className="h-4.5 w-4.5" />
-          </button>
-        </div>
+    {/* Brand */}
+    <div className="flex-1 min-w-0">
+      <h1 className="text-xl font-bold leading-none text-primary">
+        Dryvziro
+      </h1>
 
+      <p className="mt-1 text-[9px] font-semibold uppercase tracking-[0.05em] text-white">
+        Climate Intelligence
+      </p>
+    </div>
+  </div>
+
+  {/* Close Button */}
+  <button
+    type="button"
+    onClick={closeSidebar}
+    aria-label="Close menu"
+    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-sidebar-foreground/60 hover:bg-sidebar-accent hover:text-sidebar-foreground lg:hidden"
+  >
+    <X className="h-4.5 w-4.5" />
+  </button>
+</div>
         {/* Main nav */}
         <nav className="flex-1 space-y-0.5 overflow-y-auto">{MAIN_NAV.map(renderLink)}</nav>
 
