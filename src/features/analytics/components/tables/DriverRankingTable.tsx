@@ -1,106 +1,106 @@
 "use client";
 
-import { Empty, Table, Tag } from "antd";
 import { Trophy } from "lucide-react";
-
 import { useDriverScores } from "../../hooks/useAnalytics";
 
 export default function DriverRankingTable() {
-  const { data, isLoading } = useDriverScores();
-
-  const columns = [
-    {
-      title: "Rank",
-      dataIndex: "rank",
-      width: 90,
-      render: (rank: number) => (
-        <Tag
-          color={rank <= 3 ? "green" : "default"}
-          className="rounded-full px-3"
-        >
-          #{rank}
-        </Tag>
-      ),
-    },
-    {
-      title: "Driver",
-      dataIndex: "driver_name",
-    },
-    {
-      title: "Performance",
-      dataIndex: "score",
-      align: "right" as const,
-      render: (value: number) => (
-        <span className="font-semibold text-primary">
-          {value.toFixed(1)}%
-        </span>
-      ),
-    },
-  ];
+  const { data = [], isLoading } = useDriverScores();
 
   return (
-    <section
-      className="
-      rounded-2xl
-      border
-      border-border/60
-      bg-card
-      shadow-sm
-      overflow-hidden
-    "
-    >
-      <div
-        className="
-        flex
-        items-center
-        gap-3
-        border-b
-        border-border/60
-        bg-muted/30
-        px-6
-        py-4
-      "
-      >
-        <div
-          className="
-          flex
-          h-10
-          w-10
-          items-center
-          justify-center
-          rounded-xl
-          bg-primary/10
-          text-primary
-        "
-        >
-          <Trophy size={20} />
-        </div>
-
+    <div className="rounded-xl border border-border/80 bg-card p-6 shadow-sm h-full">
+      {/* Header */}
+      <div className="mb-5 flex items-center justify-between">
         <div>
-          <h3 className="font-semibold text-foreground">
+          <h2 className="text-sm font-semibold text-foreground">
             Driver Rankings
-          </h3>
+          </h2>
 
-          <p className="text-sm text-muted-foreground">
-            Highest performing drivers.
+          <p className="mt-1 text-xs text-muted-foreground">
+            Top performing drivers across the fleet
           </p>
         </div>
+
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-success/10 text-success">
+          <Trophy size={18} />
+        </div>
       </div>
 
-      <div className="p-2">
-        <Table
-          rowKey="driver_id"
-          loading={isLoading}
-          columns={columns}
-          dataSource={data ?? []}
-          pagination={false}
-          locale={{
-            emptyText: (
-              <Empty description="No driver rankings available" />
-            ),
-          }}
-        />
-      </div>
-    </section>
+      {/* Loading */}
+      {isLoading ? (
+        <div className="flex h-60 items-center justify-center text-sm text-muted-foreground">
+          Loading driver rankings...
+        </div>
+      ) : data.length === 0 ? (
+        <div className="flex h-60 flex-col items-center justify-center">
+          <Trophy
+            size={42}
+            className="mb-3 text-muted-foreground/30"
+          />
+
+          <p className="text-sm text-muted-foreground">
+            No driver rankings available.
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {data.map((driver) => (
+            <div
+              key={driver.driver_id}
+              className="flex items-center justify-between border-b border-border/40 py-2 last:border-0"
+            >
+              {/* Left */}
+              <div className="flex items-center gap-3">
+                {/* Rank */}
+                <span className="w-5 text-xs font-bold text-success">
+                  {String(driver.rank).padStart(2, "0")}
+                </span>
+
+                {/* Avatar */}
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success/15 text-sm font-semibold text-success">
+                  {driver.driver_name
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </div>
+
+                {/* Driver */}
+                <div>
+                  <div className="text-sm font-medium text-foreground">
+                    {driver.driver_name}
+                  </div>
+
+                  <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                    Fleet Driver
+                  </div>
+                </div>
+              </div>
+
+              {/* Right */}
+              <div className="text-right">
+                <div className="text-sm font-semibold text-foreground">
+                  {driver.score.toFixed(1)}%
+                </div>
+
+                <div
+                  className={`text-[10px] font-bold tracking-wider ${
+                    driver.score >= 95
+                      ? "text-success"
+                      : driver.score >= 90
+                        ? "text-primary"
+                        : "text-amber-500"
+                  }`}
+                >
+                  {driver.score >= 95
+                    ? "ELITE"
+                    : driver.score >= 90
+                      ? "EXCELLENT"
+                      : "GOOD"}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }

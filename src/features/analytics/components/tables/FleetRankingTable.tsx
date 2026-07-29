@@ -1,109 +1,103 @@
 "use client";
 
-import { Empty, Progress, Table, Tag } from "antd";
 import { Truck } from "lucide-react";
-
 import { useFleetScores } from "../../hooks/useAnalytics";
 
 export default function FleetRankingTable() {
-  const { data, isLoading } = useFleetScores();
-
-  const columns = [
-    {
-      title: "Rank",
-      dataIndex: "rank",
-      width: 90,
-      render: (rank: number) => (
-        <Tag
-          color={rank <= 3 ? "green" : "default"}
-          className="rounded-full px-3"
-        >
-          #{rank}
-        </Tag>
-      ),
-    },
-    {
-      title: "Vehicle",
-      dataIndex: "vehicle",
-    },
-    {
-      title: "Fleet Score",
-      dataIndex: "score",
-      width: 220,
-      render: (value: number) => (
-        <Progress
-          percent={Math.round(value)}
-          strokeColor="var(--primary)"
-          trailColor="rgba(0,0,0,.06)"
-          size="small"
-        />
-      ),
-    },
-  ];
+  const { data = [], isLoading } = useFleetScores();
 
   return (
-    <section
-      className="
-      rounded-2xl
-      border
-      border-border/60
-      bg-card
-      shadow-sm
-      overflow-hidden
-    "
-    >
-      <div
-        className="
-        flex
-        items-center
-        gap-3
-        border-b
-        border-border/60
-        bg-muted/30
-        px-6
-        py-4
-      "
-      >
-        <div
-          className="
-          flex
-          h-10
-          w-10
-          items-center
-          justify-center
-          rounded-xl
-          bg-primary/10
-          text-primary
-        "
-        >
-          <Truck size={20} />
-        </div>
-
+    <div className="rounded-xl border border-border/80 bg-card p-6 shadow-sm h-full">
+      {/* Header */}
+      <div className="mb-5 flex items-center justify-between">
         <div>
-          <h3 className="font-semibold text-foreground">
+          <h2 className="text-sm font-semibold text-foreground">
             Fleet Rankings
-          </h3>
+          </h2>
 
-          <p className="text-sm text-muted-foreground">
-            Fleet performance based on efficiency and emissions.
+          <p className="mt-1 text-xs text-muted-foreground">
+            Highest performing vehicles across the fleet
           </p>
         </div>
+
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-success/10 text-success">
+          <Truck size={18} />
+        </div>
       </div>
 
-      <div className="p-2">
-        <Table
-          rowKey="vehicle_id"
-          loading={isLoading}
-          columns={columns}
-          dataSource={data ?? []}
-          pagination={false}
-          locale={{
-            emptyText: (
-              <Empty description="No fleet rankings available" />
-            ),
-          }}
-        />
-      </div>
-    </section>
+      {isLoading ? (
+        <div className="flex h-60 items-center justify-center text-sm text-muted-foreground">
+          Loading fleet rankings...
+        </div>
+      ) : data.length === 0 ? (
+        <div className="flex h-60 flex-col items-center justify-center">
+          <Truck
+            size={42}
+            className="mb-3 text-muted-foreground/30"
+          />
+
+          <p className="text-sm text-muted-foreground">
+            No fleet rankings available.
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {data.map((vehicle) => (
+            <div
+              key={vehicle.vehicle_id}
+              className="flex items-center justify-between border-b border-border/40 py-2 last:border-0"
+            >
+              {/* Left */}
+              <div className="flex items-center gap-3">
+                {/* Rank */}
+                <span className="w-5 text-xs font-bold text-success">
+                  {String(vehicle.rank).padStart(2, "0")}
+                </span>
+
+                {/* Avatar */}
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-success/15 text-xs font-semibold text-success">
+                  {vehicle.vehicle.split(" ")[0]}
+                </div>
+
+                {/* Vehicle */}
+                <div>
+                  <div className="text-sm font-medium text-foreground">
+                    {vehicle.vehicle}
+                  </div>
+
+                  <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                    {vehicle.distance_km.toFixed(0)} KM •{" "}
+                    {vehicle.efficiency.toFixed(1)} KM/L
+                  </div>
+                </div>
+              </div>
+
+              {/* Right */}
+              <div className="text-right">
+                <div className="text-sm font-semibold text-foreground">
+                  {vehicle.score.toFixed(1)}%
+                </div>
+
+                <div
+                  className={`text-[10px] font-bold tracking-wider ${
+                    vehicle.score >= 95
+                      ? "text-success"
+                      : vehicle.score >= 90
+                        ? "text-primary"
+                        : "text-amber-500"
+                  }`}
+                >
+                  {vehicle.score >= 95
+                    ? "ELITE"
+                    : vehicle.score >= 90
+                      ? "EXCELLENT"
+                      : "GOOD"}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
