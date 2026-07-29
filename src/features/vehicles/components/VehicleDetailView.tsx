@@ -12,7 +12,7 @@ import {
   type VehicleDetailTab,
 } from "@/features/vehicles/components/VehicleDetailTabs";
 import { VehicleDetailTabPlaceholder } from "@/features/vehicles/components/VehicleDetailTabPlaceholder";
-import { TelemetryPendingPanel } from "@/features/vehicles/components/TelemetryPendingPanel";
+import { TelemetryPendingPanel } from "./TelemetryPendingPanel";
 import { EditVehicleModal } from "@/features/vehicles/components/EditVehicleModal";
 import { DeleteVehicleDialog } from "@/features/vehicles/components/DeleteVehicleDialog";
 import type { Vehicle } from "@/features/vehicles/types/vehicle";
@@ -42,7 +42,7 @@ export function VehicleDetailView({ vehicleId }: VehicleDetailViewProps) {
     return (
       <div className="flex flex-1 flex-col">
         <Header title="Vehicles" />
-        <div className="flex flex-1 items-center justify-center gap-2 p-6 text-sm text-muted-foreground">
+        <div className="flex flex-1 items-center justify-center gap-2 p-6 text-sm text-foreground">
           <Loader2 className="h-4 w-4 animate-spin" />
           Loading vehicle...
         </div>
@@ -60,12 +60,12 @@ export function VehicleDetailView({ vehicleId }: VehicleDetailViewProps) {
         <div className="flex-1 p-4 sm:p-6">
           <Link
             href="/vehicles"
-            className="mb-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="mb-4 inline-flex items-center gap-1.5 text-[13px] font-medium text-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Vehicle Directory
           </Link>
-          <div className="flex items-center gap-2 rounded-xl border border-border bg-card p-6 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2 rounded-xl border border-border bg-card p-6 text-sm text-foreground">
             <AlertTriangle className="h-4 w-4 text-destructive" />
             {notFound
               ? "This vehicle doesn't exist, or you don't have access to it."
@@ -84,7 +84,7 @@ export function VehicleDetailView({ vehicleId }: VehicleDetailViewProps) {
         <div className="flex items-center justify-between">
           <Link
             href="/vehicles"
-            className="inline-flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-1.5 text-[12px] font-medium text-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             Back to Vehicle Directory
@@ -115,13 +115,16 @@ export function VehicleDetailView({ vehicleId }: VehicleDetailViewProps) {
         <VehicleDetailTabs activeTab={activeTab} onChange={setActiveTab} />
 
         {activeTab === "overview" ? (
-          <TelemetryPendingPanel />
+          <TelemetryPendingPanel devices={vehicle.devices ?? []} />
         ) : (
           <VehicleDetailTabPlaceholder tabLabel={TAB_LABELS[activeTab]} />
         )}
       </div>
 
-      <EditVehicleModal vehicle={isEditing ? (vehicle as Vehicle) : null} onClose={() => setIsEditing(false)} />
+      <EditVehicleModal
+        vehicle={isEditing ? (vehicle as Vehicle) : null}
+        onClose={() => setIsEditing(false)}
+      />
       <DeleteVehicleDialog
         vehicle={isDeleting ? (vehicle as Vehicle) : null}
         onClose={() => setIsDeleting(false)}

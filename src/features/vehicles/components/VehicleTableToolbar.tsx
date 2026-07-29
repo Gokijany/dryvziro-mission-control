@@ -32,7 +32,7 @@ export function VehicleTableToolbar({
             <button
               type="button"
               onClick={onAssignRoute}
-              className="flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="flex items-center gap-1.5 text-[12px] font-medium text-foreground transition-colors hover:text-foreground"
             >
               <RouteIcon className="h-3.5 w-3.5" />
               Assign Route
@@ -40,7 +40,7 @@ export function VehicleTableToolbar({
             <button
               type="button"
               onClick={onExportPdf}
-              className="flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="flex items-center gap-1.5 text-[12px] font-medium text-foreground transition-colors hover:text-foreground"
             >
               <FileDown className="h-3.5 w-3.5" />
               Export PDF
@@ -48,7 +48,7 @@ export function VehicleTableToolbar({
             <button
               type="button"
               onClick={onExportCsv}
-              className="flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="flex items-center gap-1.5 text-[12px] font-medium text-foreground transition-colors hover:text-foreground"
             >
               <FileSpreadsheet className="h-3.5 w-3.5" />
               Export CSV
@@ -57,7 +57,7 @@ export function VehicleTableToolbar({
         )}
       </div>
 
-      <span className="text-[12px] text-muted-foreground">
+      <span className="text-[12px] text-foreground">
         Showing {rangeStart}-{rangeEnd} of {total.toLocaleString()}
       </span>
     </div>

@@ -16,13 +16,18 @@ export function useLogin() {
     mutationFn: (data: LoginRequest) => AuthService.login(data),
 
     onSuccess: (response) => {
-      loginStore(response.user, response.access_token, response.refresh_token);
+      loginStore(
+        response.user,
+        response.access_token,
+        response.refresh_token,
+        response.expires_in,
+      );
 
       router.push("/dashboard");
     },
 
     onError: (error) => {
-      console.error(error);
+      console.error("Login failed:", error);
     },
   });
 }

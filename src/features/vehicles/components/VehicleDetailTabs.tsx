@@ -1,13 +1,7 @@
 "use client";
 
 export type VehicleDetailTab =
-  | "overview"
-  | "trips"
-  | "emissions"
-  | "fuel"
-  | "maintenance"
-  | "sensor"
-  | "documents";
+  "overview" | "trips" | "emissions" | "fuel" | "maintenance" | "sensor" | "documents";
 
 const TABS: { id: VehicleDetailTab; label: string }[] = [
   { id: "overview", label: "Overview" },
@@ -38,7 +32,7 @@ export function VehicleDetailTabs({ activeTab, onChange }: VehicleDetailTabsProp
               className={`whitespace-nowrap border-b-2 pb-3 pt-1 text-[12px] font-semibold tracking-wide transition-colors ${
                 active
                   ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
+                  : "border-transparent text-foreground hover:text-foreground"
               }`}
             >
               {tab.label.toUpperCase()}

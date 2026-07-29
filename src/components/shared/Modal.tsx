@@ -65,15 +65,13 @@ export function Modal({
             <h2 id="modal-title" className="text-lg font-semibold text-foreground">
               {title}
             </h2>
-            {description && (
-              <p className="mt-1 text-[13px] text-muted-foreground">{description}</p>
-            )}
+            {description && <p className="mt-1 text-[13px] text-foreground">{description}</p>}
           </div>
           <button
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-muted hover:text-foreground"
           >
             <X className="h-4 w-4" />
           </button>

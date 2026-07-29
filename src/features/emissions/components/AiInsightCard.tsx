@@ -7,8 +7,10 @@ export function AiInsightCard() {
         <div className="flex items-center gap-2 text-xs font-semibold text-primary mb-2">
           <Wind className="h-4 w-4" /> AI INSIGHT
         </div>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          &ldquo;Optimizing Route #42-B during peak humidity levels could reduce local particulate matter (PM2.5) by <span className="text-foreground font-medium">14.5%</span> next week.&rdquo;
+        <p className="text-xs text-foreground leading-relaxed">
+          &ldquo;Optimizing Route #42-B during peak humidity levels could reduce local particulate
+          matter (PM2.5) by <span className="text-foreground font-medium">14.5%</span> next
+          week.&rdquo;
         </p>
       </div>
       <button className="mt-4 flex items-center gap-1.5 text-xs font-semibold text-primary hover:underline">

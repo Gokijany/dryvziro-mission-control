@@ -74,12 +74,13 @@ export function FleetMap() {
     mapLoaded,
   });
 
-  const selectedVehicle = mockVehicleTracking.find((v) => v.vehicleId === selectedVehicleId) ?? null;
+  const selectedVehicle =
+    mockVehicleTracking.find((v) => v.vehicleId === selectedVehicleId) ?? null;
 
   if (mapError) {
     return (
       <div className="flex h-full w-full items-center justify-center rounded-xl border border-dashed border-destructive/40 bg-card/50 p-8 text-center">
-        <p className="max-w-sm text-[13px] text-muted-foreground">{mapError}</p>
+        <p className="max-w-sm text-[13px] text-foreground">{mapError}</p>
       </div>
     );
   }
@@ -123,4 +124,4 @@ export function FleetMap() {
   );
 }
 
-export default FleetMap; 
+export default FleetMap;

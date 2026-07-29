@@ -8,20 +8,25 @@ interface TripTimelineCardProps {
   onSelectTrip?: (trip: TripLogEntry) => void;
 }
 
-export function TripTimelineCard({ trips, onFilter, onExport, onSelectTrip }: TripTimelineCardProps) {
+export function TripTimelineCard({
+  trips,
+  onFilter,
+  onExport,
+  onSelectTrip,
+}: TripTimelineCardProps) {
   return (
     <div className="rounded-xl border border-border bg-card">
       <div className="flex items-center justify-between p-5">
         <div>
           <div className="text-[13px] font-medium text-foreground">Trip Timeline</div>
-          <div className="mt-0.5 text-[11px] text-muted-foreground">Last 24 Hours Activity</div>
+          <div className="mt-0.5 text-[11px] text-foreground">Last 24 Hours Activity</div>
         </div>
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={onFilter}
             aria-label="Filter trips"
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors hover:text-foreground"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted text-foreground transition-colors hover:text-foreground"
           >
             <SlidersHorizontal className="h-3.5 w-3.5" />
           </button>
@@ -29,7 +34,7 @@ export function TripTimelineCard({ trips, onFilter, onExport, onSelectTrip }: Tr
             type="button"
             onClick={onExport}
             aria-label="Export trips"
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors hover:text-foreground"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-muted text-foreground transition-colors hover:text-foreground"
           >
             <Download className="h-3.5 w-3.5" />
           </button>
@@ -40,22 +45,22 @@ export function TripTimelineCard({ trips, onFilter, onExport, onSelectTrip }: Tr
         <table className="w-full min-w-160 border-collapse text-left">
           <thead>
             <tr className="border-b border-border">
-              <th className="px-5 py-2.5 text-[10px] font-semibold tracking-widest text-muted-foreground">
+              <th className="px-5 py-2.5 text-[10px] font-semibold tracking-widest text-foreground">
                 TIME
               </th>
-              <th className="px-3 py-2.5 text-[10px] font-semibold tracking-widest text-muted-foreground">
+              <th className="px-3 py-2.5 text-[10px] font-semibold tracking-widest text-foreground">
                 DESTINATION
               </th>
-              <th className="px-3 py-2.5 text-[10px] font-semibold tracking-widest text-muted-foreground">
+              <th className="px-3 py-2.5 text-[10px] font-semibold tracking-widest text-foreground">
                 DISTANCE
               </th>
-              <th className="px-3 py-2.5 text-[10px] font-semibold tracking-widest text-muted-foreground">
+              <th className="px-3 py-2.5 text-[10px] font-semibold tracking-widest text-foreground">
                 CO2 SAVED
               </th>
-              <th className="px-3 py-2.5 text-[10px] font-semibold tracking-widest text-muted-foreground">
+              <th className="px-3 py-2.5 text-[10px] font-semibold tracking-widest text-foreground">
                 DRIVER
               </th>
-              <th className="w-10 px-5 py-2.5 text-[10px] font-semibold tracking-widest text-muted-foreground">
+              <th className="w-10 px-5 py-2.5 text-[10px] font-semibold tracking-widest text-foreground">
                 TELEMETRY
               </th>
             </tr>
@@ -73,17 +78,17 @@ export function TripTimelineCard({ trips, onFilter, onExport, onSelectTrip }: Tr
                 <td className="px-3 py-3 text-[13px] font-medium text-foreground">
                   {trip.destination}
                 </td>
-                <td className="px-3 py-3 text-[13px] text-muted-foreground">{trip.distanceKm} km</td>
+                <td className="px-3 py-3 text-[13px] text-foreground">{trip.distanceKm} km</td>
                 <td className="px-3 py-3 text-[13px] font-medium">
                   {trip.co2SavedKg > 0 ? (
                     <span className="text-success">+{trip.co2SavedKg} kg</span>
                   ) : (
-                    <span className="text-muted-foreground">—</span>
+                    <span className="text-foreground">—</span>
                   )}
                 </td>
                 <td className="px-3 py-3 text-[13px] text-foreground">{trip.driver}</td>
                 <td className="px-5 py-3 text-right">
-                  <ChevronRight className="ml-auto h-4 w-4 text-muted-foreground" />
+                  <ChevronRight className="ml-auto h-4 w-4 text-foreground" />
                 </td>
               </tr>
             ))}

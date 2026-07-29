@@ -69,7 +69,7 @@ export function VehiclesView() {
 
   const toggleAll = () => {
     setSelectedIds((prev) =>
-      prev.size === vehicles.length ? new Set() : new Set(vehicles.map((v) => v.id))
+      prev.size === vehicles.length ? new Set() : new Set(vehicles.map((v) => v.id)),
     );
   };
 
@@ -99,7 +99,7 @@ export function VehiclesView() {
           />
 
           {isLoading ? (
-            <div className="flex items-center justify-center gap-2 p-12 text-sm text-muted-foreground">
+            <div className="flex items-center justify-center gap-2 p-12 text-sm text-foreground">
               <Loader2 className="h-4 w-4 animate-spin" />
               Loading vehicles...
             </div>
@@ -109,7 +109,7 @@ export function VehiclesView() {
               {error instanceof Error ? error.message : "Failed to load vehicles."}
             </div>
           ) : vehicles.length === 0 ? (
-            <div className="p-12 text-center text-sm text-muted-foreground">
+            <div className="p-12 text-center text-sm text-foreground">
               No vehicles match the current filters.
             </div>
           ) : (
