@@ -46,7 +46,7 @@ const MAIN_NAV: NavItem[] = [
   // { label: "Maintenance", href: "/maintenance", icon: Wrench },
   // { label: "Climate AI", href: "/climate-ai", icon: Sparkles },
   { label: "Organizations", href: "/organizations", icon: Users },
-  // { label: "Analytics", href: "/analytics", icon: BarChart3 },
+  { label: "Analytics", href: "/analytics", icon: BarChart3 },
   { label: "Reports", href: "/reports", icon: FileText },
 ];
 
